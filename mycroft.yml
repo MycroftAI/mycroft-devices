@@ -58,6 +58,9 @@ actions:
       - usbg-manager
       - xserver-xorg-video-armsoc
 
+  - action: overlays
+    source: overlay
+
   # partition table
   - action: image-partition
     imagename: {{ $image }}
@@ -81,20 +84,19 @@ actions:
   - action: filesystem-deploy
     description: Deploying filesystem into image
 
-
   - action: raw
-    origin: scratch
-    source: /scratch/idbloader.img
+    origin: filesystem
+    source: /opt/u-boot/respeakerv2/idbloader.img
     offset: 64
 
   - action: raw
-    origin: scratch
-    source: /scratch/uboot.img
+    origin: filesystem
+    source: /opt/u-boot/respeakerv2/uboot.img
     offset: 16389
 
   - action: raw
-    origin: scratch
-    source: /scratch/trust.img
+    origin: filesystem
+    source: /opt/u-boot/respeakerv2/trust.img
     offset: 24576
 
   - action: run
