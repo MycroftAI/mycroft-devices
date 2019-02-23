@@ -1,0 +1,102 @@
+{{- $image := or .image "mycroft-respeaker.img" -}}
+{{ $suite :=  "bionic" }}
+
+architecture: armhf
+
+actions:
+  - action: download
+    url: https://github.com/respeaker/source_builder/raw/debian/binary/idbloader.img
+    unpack: false
+    name: idbloader
+
+  - action: download
+    url: https://github.com/respeaker/source_builder/raw/debian/binary/uboot.img
+    unpack: false
+    name: uboot
+
+  - action: download
+    url: https://github.com/respeaker/source_builder/raw/debian/binary/trust.img
+    unpack: false
+    name: trust
+
+  - action: debootstrap
+    keyring-package: ubuntu-keyring
+    keyring-file: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+    suite: {{ $suite }}
+    components:
+      - main
+      - restricted
+      - multiverse
+      - universe
+    mirror: http://ports.ubuntu.com/ubuntu-ports
+    variant: minbase
+
+  - action: apt
+    packages:
+      - gnupg
+      - wget
+      - software-properties-common
+  
+  - action: run
+    description: Add respeaker gpg key
+    chroot: true
+    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9CA5B1D736E1FA221A9FA27F6AFDE774BB8F40F3
+
+  - action: run
+    description: Add respeaker apt repo
+    chroot: true
+    command: echo "deb http://respeaker.seeed.io/deb stretch main" > /etc/apt/sources.list.d/respeaker.list
+
+  - action: apt
+    packages:
+      - linux-image-4.4.138-respeaker-r0
+      - linux-firmware-image-4.4.138-respeaker-r0
+      - libmali-rk-utgard-450-r7p0
+      - re-bluetooth
+      - re-wifi
+      - rk-firmware
+      - usbg-manager
+      - xserver-xorg-video-armsoc
+
+  # partition table
+  - action: image-partition
+    imagename: {{ $image }}
+    imagesize: 4GB
+    partitiontype: msdos
+    mountpoints:
+      - mountpoint: /
+        partition: root
+    partitions:
+      - name: boot
+        fs: fat32
+        start: 16MB
+        end: 116MB
+        flags: [ boot ]
+      - name: root
+        fs: ext4
+        start: 116MB
+        end: 100%
+        flags: [ boot ]
+
+  - action: filesystem-deploy
+    description: Deploying filesystem into image
+
+
+  - action: raw
+    origin: scratch
+    source: /scratch/idbloader.img
+    offset: 64
+
+  - action: raw
+    origin: scratch
+    source: /scratch/uboot.img
+    offset: 16389
+
+  - action: raw
+    origin: scratch
+    source: /scratch/trust.img
+    offset: 24576
+
+  - action: run
+    postprocess: true
+    command: gzip -f {{ $image }}
