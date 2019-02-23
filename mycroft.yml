@@ -58,7 +58,7 @@ actions:
       - usbg-manager
       - xserver-xorg-video-armsoc
 
-  - action: overlays
+  - action: overlay
     source: overlay
 
   # partition table
