@@ -4,21 +4,6 @@
 architecture: armhf
 
 actions:
-  - action: download
-    url: https://github.com/respeaker/source_builder/raw/debian/binary/idbloader.img
-    unpack: false
-    name: idbloader
-
-  - action: download
-    url: https://github.com/respeaker/source_builder/raw/debian/binary/uboot.img
-    unpack: false
-    name: uboot
-
-  - action: download
-    url: https://github.com/respeaker/source_builder/raw/debian/binary/trust.img
-    unpack: false
-    name: trust
-
   - action: debootstrap
     keyring-package: ubuntu-keyring
     keyring-file: /usr/share/keyrings/ubuntu-archive-keyring.gpg
