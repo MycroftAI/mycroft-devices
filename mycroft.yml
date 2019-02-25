@@ -19,7 +19,7 @@ actions:
   - action: apt
     packages:
       - ubuntu-minimal
-      - gnupg
+      - gnupg1
       - wget
       - software-properties-common
   
