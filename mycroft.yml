@@ -53,14 +53,14 @@ actions:
     partitiontype: msdos
     mountpoints:
       - mountpoint: /
-        partition: root
+        partition: ROOTFS
     partitions:
-      - name: boot
+      - name: BOOT
         fs: fat32
         start: 32768s
         end: 237567s
         flags: [ boot ]
-      - name: root
+      - name: ROOTFS
         fs: ext4
         start: 237568s
         end: 100%
