@@ -72,17 +72,17 @@ actions:
   - action: raw
     origin: filesystem
     source: /opt/u-boot/respeakerv2/idbloader.img
-    offset: 64
+    offset: {{ sector 64 }}
 
   - action: raw
     origin: filesystem
     source: /opt/u-boot/respeakerv2/uboot.img
-    offset: 16389
+    offset: {{ sector 16389 }}
 
   - action: raw
     origin: filesystem
     source: /opt/u-boot/respeakerv2/trust.img
-    offset: 24576
+    offset: {{ sector 24576 }}
 
   - action: run
     postprocess: true
