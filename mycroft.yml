@@ -57,12 +57,12 @@ actions:
     partitions:
       - name: boot
         fs: fat32
-        start: 32768
-        end: 237567
+        start: 32768s
+        end: 237567s
         flags: [ boot ]
       - name: root
         fs: ext4
-        start: 237568
+        start: 237568s
         end: 100%
         flags: [ boot ]
 
