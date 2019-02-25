@@ -18,7 +18,6 @@ actions:
 
   - action: apt
     packages:
-      - ubuntu-minimal
       - gnupg1
       - wget
       - curl
@@ -27,7 +26,7 @@ actions:
   - action: run
     description: Add respeaker gpg key
     chroot: true
-    command: curl http://respeaker.seeed.io/deb/public.key | apt-key add -
+    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9CA5B1D736E1FA221A9FA27F6AFDE774BB8F40F3
 
   - action: run
     description: Add respeaker apt repo
@@ -36,6 +35,7 @@ actions:
 
   - action: apt
     packages:
+      - ubuntu-minimal
       - linux-image-4.4.138-respeaker-r0
       - linux-firmware-image-4.4.138-respeaker-r0
       - libmali-rk-utgard-450-r7p0
