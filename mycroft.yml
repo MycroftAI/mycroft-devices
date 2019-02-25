@@ -49,7 +49,7 @@ actions:
   # partition table
   - action: image-partition
     imagename: {{ $image }}
-    imagesize: 4GB
+    imagesize: 1GB
     partitiontype: msdos
     mountpoints:
       - mountpoint: /
