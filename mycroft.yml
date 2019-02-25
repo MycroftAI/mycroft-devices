@@ -26,7 +26,7 @@ actions:
   - action: run
     description: Add respeaker gpg key
     chroot: true
-    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9CA5B1D736E1FA221A9FA27F6AFDE774BB8F40F3
+    command: curl http://respeaker.seeed.io/deb/public.key | apt-key add -
 
   - action: run
     description: Add respeaker apt repo
