@@ -77,7 +77,7 @@ actions:
   - action: raw
     origin: filesystem
     source: /opt/u-boot/respeakerv2/uboot.img
-    offset: {{ sector 16389 }}
+    offset: {{ sector 16384 }}
 
   - action: raw
     origin: filesystem
