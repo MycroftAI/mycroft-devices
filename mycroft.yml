@@ -18,6 +18,7 @@ actions:
 
   - action: apt
     packages:
+      - ubuntu-minimal
       - gnupg
       - wget
       - software-properties-common
