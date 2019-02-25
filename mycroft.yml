@@ -21,6 +21,7 @@ actions:
       - ubuntu-minimal
       - gnupg1
       - wget
+      - curl
       - software-properties-common
   
   - action: run
