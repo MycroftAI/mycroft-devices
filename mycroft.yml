@@ -72,12 +72,12 @@ actions:
     partitions:
       - name: boot
         fs: fat32
-        start: 16MB
-        end: 116MB
+        start: 32768
+        end: 237567
         flags: [ boot ]
       - name: root
         fs: ext4
-        start: 116MB
+        start: 237568
         end: 100%
         flags: [ boot ]
 
