@@ -21,17 +21,38 @@ actions:
       - gnupg
       - wget
       - curl
+      - apt-transport-https
       - software-properties-common
   
   - action: run
     description: Add respeaker gpg key
     chroot: true
-    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9CA5B1D736E1FA221A9FA27F6AFDE774BB8F40F3
+    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys '9CA5B1D736E1FA221A9FA27F6AFDE774BB8F40F3'
+
+  - action: run
+    description: Add KDE Neon gpg key
+    chroot: true
+    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys '444D ABCF 3667 D028 3F89  4EDD E6D4 7362 5575 1E5D'
+
+  - action: run
+    description: Add Xenon gpg key
+    chroot: true
+    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 'CB87 A99C D05E 5E0C 7017  4A68 E8AF 1B0B 45D8 3EBD'
 
   - action: run
     description: Add respeaker apt repo
     chroot: true
     command: echo "deb http://respeaker.seeed.io/deb stretch main" > /etc/apt/sources.list.d/respeaker.list
+
+  - action: run
+    description: Add neon apt repo
+    chroot: true
+    command: echo "deb https://archive.neon.kde.org/unstable bionic main" > /etc/apt/sources.list.d/neon.list
+
+  - action: run
+    description: Add xneon apt repo
+    chroot: true
+    command: echo "deb http://archive.xenon.pangea.pub/unstable bionic main" > /etc/apt/sources.list.d/xenon.list
 
   - action: apt
     packages:
@@ -44,6 +65,30 @@ actions:
       - rk-firmware
       - usbg-manager
       - xserver-xorg-video-armsoc
+      - plasma-minishell
+      - mycroft-gui
+      - mycroft-core
+      - mycroft-skill-installer
+      - mycroft-settings
+      - plasma-nm
+      - plasma-pa
+      - plasma-widgets-addons
+      - plasma-workspace-wallpapers
+
+  - action: run
+    description: Set up user account
+    chroot: true
+    script: scripts/02-setup_phablet_user.sh
+
+  - action: run
+    description: Install pairing skills
+    chroot: true
+    script: scripts/03-install-pairing-skills.sh
+
+  - action: run
+    description: remove zfs
+    chroot: true
+    script: scripts/051-zfs.sh
 
   - action: overlay
     source: overlay
