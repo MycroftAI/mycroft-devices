@@ -16,6 +16,16 @@ actions:
     mirror: http://ports.ubuntu.com/ubuntu-ports
     variant: minbase
 
+  - action: run
+    description: Add bionic-updates apt repo
+    chroot: true
+    command: echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-updates main restricted multiverse universe" >> /etc/apt/sources.list
+
+  - action: run
+    description: Add bionic-backports apt repo
+    chroot: true
+    command: echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-backports main restricted multiverse universe" >> /etc/apt/sources.list
+
   - action: apt
     packages:
       - gnupg
