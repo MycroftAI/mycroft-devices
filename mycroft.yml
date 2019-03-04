@@ -66,23 +66,23 @@ actions:
 
   - action: apt
     packages:
-      - ubuntu-minimal
-      - linux-image-4.4.138-respeaker-r0
-      - linux-firmware-image-4.4.138-respeaker-r0
       - libmali-rk-utgard-400-r7p0
-      - re-bluetooth
-      - re-wifi
-      - rk-firmware
-      - usbg-manager
-      - xserver-xorg-video-armsoc-bsp-rock64
-      - plasma-minishell
+      - linux-firmware-image-4.4.138-respeaker-r0
+      - linux-image-4.4.138-respeaker-r0
       - mycroft-gui
-      - mycroft-skill-installer
       - mycroft-settings
+      - mycroft-skill-installer
+      - plasma-minishell
       - plasma-nm
       - plasma-pa
       - plasma-widgets-addons
       - plasma-workspace-wallpapers
+      - re-bluetooth
+      - re-wifi
+      - rk-firmware
+      - ubuntu-minimal
+      - usbg-manager
+      - xserver-xorg-video-armsoc-bsp-rock64
 
   - action: run
     description: Set up user account
