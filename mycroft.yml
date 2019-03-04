@@ -69,7 +69,7 @@ actions:
       - ubuntu-minimal
       - linux-image-4.4.138-respeaker-r0
       - linux-firmware-image-4.4.138-respeaker-r0
-      - libmali-rk-utgard-450-r7p0
+      - libmali-rk-utgard-400-r7p0
       - re-bluetooth
       - re-wifi
       - rk-firmware
