@@ -77,7 +77,6 @@ actions:
       - xserver-xorg-video-armsoc
       - plasma-minishell
       - mycroft-gui
-      - mycroft-core
       - mycroft-skill-installer
       - mycroft-settings
       - plasma-nm
@@ -89,11 +88,6 @@ actions:
     description: Set up user account
     chroot: true
     script: scripts/02-setup_phablet_user.sh
-
-  - action: run
-    description: Install pairing skills
-    chroot: true
-    script: scripts/03-install-pairing-skills.sh
 
   - action: run
     description: remove zfs
