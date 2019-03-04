@@ -74,7 +74,7 @@ actions:
       - re-wifi
       - rk-firmware
       - usbg-manager
-      - xserver-xorg-video-armsoc
+      - xserver-xorg-video-armsoc-bsp-rock64
       - plasma-minishell
       - mycroft-gui
       - mycroft-skill-installer
