@@ -85,6 +85,9 @@ actions:
       - ubuntu-minimal
       - usbg-manager
       - xserver-xorg-video-armsoc-bsp-rock64
+      - alsa-utils
+      - git
+      - qml-module-org-kde-lottie
 
   - action: run
     description: Set up user account
