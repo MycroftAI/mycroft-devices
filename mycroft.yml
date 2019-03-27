@@ -92,7 +92,7 @@ actions:
   - action: run
     description: Set up user account
     chroot: true
-    script: scripts/02-setup_phablet_user.sh
+    script: scripts/02-setup_respeaker_user.sh
 
   - action: run
     description: remove zfs
