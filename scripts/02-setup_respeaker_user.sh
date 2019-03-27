@@ -1,16 +1,17 @@
 #!/bin/sh -x
 
-USER=phablet
-GECOS=phablet
+USER=respeaker
+GECOS=respeaker
 UGID=32011
+PASSWORD=mycroft
 
 DEFGROUPS="tty,sudo,adm,dialout,cdrom,plugdev,audio,dip,video"
 
 echo "I: creating default user $USER"
 adduser --gecos $GECOS --disabled-login $USER --uid $UGID
 
-echo "I: set user $USER password to 1234"
-echo "phablet:1234" | /usr/sbin/chpasswd
+echo "I: set user $USER password to $PASSWORD"
+echo "$USER:$PASSWORD" | /usr/sbin/chpasswd
 
 mkdir -p /home/$USER/Music
 mkdir -p /home/$USER/Pictures
