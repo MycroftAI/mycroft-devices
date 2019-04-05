@@ -71,6 +71,7 @@ actions:
       - linux-firmware-image-4.4.138-respeaker-r0
       - linux-image-4.4.138-respeaker-r0
       - mycroft-gui
+      - mycroft-gui-mark-2
       - mycroft-settings
       - mycroft-skill-installer
       - plasma-minishell
