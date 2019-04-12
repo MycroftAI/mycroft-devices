@@ -89,6 +89,7 @@ actions:
       - alsa-utils
       - git
       - qml-module-org-kde-lottie
+      - libkf5wallet-bin
 
   - action: run
     description: Set up user account
