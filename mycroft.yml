@@ -91,6 +91,9 @@ actions:
       - qml-module-org-kde-lottie
       - libkf5wallet-bin
 
+  - action: overlay
+    source: overlay
+
   - action: run
     description: Set up user account
     chroot: true
@@ -100,9 +103,6 @@ actions:
     description: remove zfs
     chroot: true
     script: scripts/051-zfs.sh
-
-  - action: overlay
-    source: overlay
 
   # partition table
   - action: image-partition
