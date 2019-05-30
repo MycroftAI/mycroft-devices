@@ -1,0 +1,2 @@
+dtb=sun50i-a64-dontbeevil.dtb
+cmdline=quiet init=/lib/systemd/systemd
