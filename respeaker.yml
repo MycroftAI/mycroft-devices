@@ -92,7 +92,7 @@ actions:
       - libkf5wallet-bin
 
   - action: overlay
-    source: overlay
+    source: respeaker
 
   - action: run
     description: Set up user account
