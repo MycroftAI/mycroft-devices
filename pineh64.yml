@@ -89,7 +89,7 @@ actions:
     destination: /var/tmp/u-boot-sunxi-with-spl.bin
 
   - action: overlay
-    source: pinephone/overlay
+    source: pineh64
     destination: /
 
     # Mainline hardware specific packages
