@@ -107,10 +107,8 @@ actions:
       - sddm
       - kwin-x11
       - plasma-minishell
-      - plasma-nm
       - plasma-pa
       - plasma-widgets-addons
-      - plasma-workspace-wallpapers
       - libkf5wallet-bin
 
     # Mycroft packages
@@ -121,11 +119,13 @@ actions:
       - mycroft-settings
       - mycroft-skill-installer
       - qml-module-org-kde-lottie
-      - network-manager
+      - plasma-workspace-wallpapers
 
     # Todo ugly, revert me
   - action: apt
     packages:
+      - network-manager
+      - plasma-nm
       - ubuntu-minimal
 
   - action: overlay
