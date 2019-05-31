@@ -99,22 +99,31 @@ actions:
       - network-manager
       - vim
       - u-boot-tools
+      - ubuntu-minimal
+      - alsa-utils
+      - git
+      - sddm
+
+    # Desktop packages
+  - action: apt
+    packages:
       - kwin-x11
-      - mycroft-gui
-      - mycroft-gui-mark-2
-      - mycroft-settings
-      - mycroft-skill-installer
       - plasma-minishell
       - plasma-nm
       - plasma-pa
       - plasma-widgets-addons
       - plasma-workspace-wallpapers
-      - sddm
-      - ubuntu-minimal
-      - alsa-utils
-      - git
-      - qml-module-org-kde-lottie
       - libkf5wallet-bin
+      - network-manager
+
+    # Mycroft packages
+  - action: apt
+    packages:
+      - mycroft-gui
+      - mycroft-gui-mark-2
+      - mycroft-settings
+      - mycroft-skill-installer
+      - qml-module-org-kde-lottie
 
   - action: overlay
     source: overlay
