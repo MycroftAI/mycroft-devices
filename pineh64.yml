@@ -96,17 +96,16 @@ actions:
   - action: apt
     packages:
       - bash-completion
-      - network-manager
       - vim
       - u-boot-tools
       - ubuntu-minimal
       - alsa-utils
       - git
-      - sddm
 
     # Desktop packages
   - action: apt
     packages:
+      - sddm
       - kwin-x11
       - plasma-minishell
       - plasma-nm
@@ -114,7 +113,6 @@ actions:
       - plasma-widgets-addons
       - plasma-workspace-wallpapers
       - libkf5wallet-bin
-      - network-manager
 
     # Mycroft packages
   - action: apt
@@ -124,6 +122,7 @@ actions:
       - mycroft-settings
       - mycroft-skill-installer
       - qml-module-org-kde-lottie
+      - network-manager
 
   - action: overlay
     source: overlay
