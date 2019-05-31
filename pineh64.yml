@@ -7,7 +7,7 @@ architecture: {{ $architecture }}
 actions:
   - action: debootstrap
     keyring-package: ubuntu-keyring
-    keyring-file: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+    keyring-file: ubuntu-archive-keyring.gpg
     suite: {{ $suite }}
     components:
       - main
