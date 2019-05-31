@@ -102,24 +102,24 @@ actions:
       - git
 
     # Desktop packages
-  - action: apt
-    packages:
-      - sddm
-      - kwin-x11
-      - plasma-minishell
-      - plasma-pa
-      - plasma-widgets-addons
-      - libkf5wallet-bin
+#  - action: apt
+#    packages:
+#      - sddm
+#      - kwin-x11
+#      - plasma-minishell
+#      - plasma-pa
+#      - plasma-widgets-addons
+#      - libkf5wallet-bin
 
     # Mycroft packages
-  - action: apt
-    packages:
-      - mycroft-gui
-      - mycroft-gui-mark-2
-      - mycroft-settings
-      - mycroft-skill-installer
-      - qml-module-org-kde-lottie
-      - plasma-workspace-wallpapers
+#  - action: apt
+#    packages:
+#      - mycroft-gui
+#      - mycroft-gui-mark-2
+#      - mycroft-settings
+#      - mycroft-skill-installer
+#      - qml-module-org-kde-lottie
+#      - plasma-workspace-wallpapers
 
     # Todo ugly, revert me
   - action: apt
