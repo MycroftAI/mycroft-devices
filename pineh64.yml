@@ -98,7 +98,6 @@ actions:
       - bash-completion
       - vim
       - u-boot-tools
-      - ubuntu-minimal
       - alsa-utils
       - git
 
@@ -123,6 +122,11 @@ actions:
       - mycroft-skill-installer
       - qml-module-org-kde-lottie
       - network-manager
+
+    # Todo ugly, revert me
+  - action: apt
+    packages:
+      - ubuntu-minimal
 
   - action: overlay
     source: overlay
