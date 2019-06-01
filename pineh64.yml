@@ -94,12 +94,14 @@ actions:
 
     # Mainline hardware specific packages
   - action: apt
+    description: Basic packages
     packages:
       - bash-completion
       - vim
       - u-boot-tools
       - alsa-utils
       - git
+      - breeze-icon-theme
 
     # Desktop packages
   - action: apt
