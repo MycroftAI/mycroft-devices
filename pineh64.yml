@@ -104,6 +104,10 @@ actions:
       - breeze-icon-theme
       - python3
 
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
     # Desktop packages
   - action: apt
     description: Plama desktop packages
