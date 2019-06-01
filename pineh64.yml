@@ -103,6 +103,7 @@ actions:
 
     # Desktop packages
   - action: apt
+    description: Plama desktop packages
     packages:
       - sddm
       - kwin-x11
@@ -117,6 +118,7 @@ actions:
 
     # Mycroft packages
   - action: apt
+    description: Mycroft packages
     packages:
       - mycroft-gui
       - mycroft-gui-mark-2
@@ -127,6 +129,7 @@ actions:
 
     # Todo ugly, revert me
   - action: apt
+    description: Networking packages
     packages:
       - network-manager
       - plasma-nm
