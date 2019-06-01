@@ -102,6 +102,7 @@ actions:
       - alsa-utils
       - git
       - breeze-icon-theme
+      - python3
 
     # Desktop packages
   - action: apt
