@@ -7,7 +7,7 @@ architecture: {{ $architecture }}
 actions:
   - action: debootstrap
     keyring-package: ubuntu-keyring
-    keyring-file: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+    keyring-file: ubuntu-archive-keyring.gpg
     suite: {{ $suite }}
     components:
       - main
@@ -96,28 +96,44 @@ actions:
   - action: apt
     packages:
       - bash-completion
-      - network-manager
       - vim
       - u-boot-tools
+      - alsa-utils
+      - git
+
+    # Desktop packages
+  - action: apt
+    packages:
+      - sddm
       - kwin-x11
+      - plasma-minishell
+      - plasma-pa
+      - plasma-widgets-addons
+      - libkf5wallet-bin
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+    # Mycroft packages
+  - action: apt
+    packages:
       - mycroft-gui
       - mycroft-gui-mark-2
       - mycroft-settings
       - mycroft-skill-installer
-      - plasma-minishell
-      - plasma-nm
-      - plasma-pa
-      - plasma-widgets-addons
-      - plasma-workspace-wallpapers
-      - sddm
-      - ubuntu-minimal
-      - alsa-utils
-      - git
       - qml-module-org-kde-lottie
-      - libkf5wallet-bin
+      - plasma-workspace-wallpapers
+
+    # Todo ugly, revert me
+  - action: apt
+    packages:
+      - network-manager
+      - plasma-nm
+      - ubuntu-minimal
 
   - action: overlay
-    source: overlay
+    source: pineh64
 
   - action: run
     description: Set up user account
