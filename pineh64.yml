@@ -172,7 +172,7 @@ actions:
   - action: run
     description: Set hostname
     chroot: true
-    command: echo debian-device > /etc/hostname
+    command: echo pineh64 > /etc/hostname
 
   - action: run
     description: Compile u-boot script
