@@ -118,6 +118,10 @@ actions:
       - plasma-pa
       - plasma-widgets-addons
       - libkf5wallet-bin
+      - openssh-server
+      - ftp
+      - i2c-tools
+      - nano
 
   - action: overlay
     description: fix DNS inside container
