@@ -103,6 +103,7 @@ actions:
       - git
       - breeze-icon-theme
       - python3
+      - linux-firmware
 
   - action: overlay
     description: fix DNS inside container
