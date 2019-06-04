@@ -7,7 +7,7 @@ architecture: {{ $architecture }}
 actions:
   - action: debootstrap
     keyring-package: ubuntu-keyring
-    keyring-file: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+    keyring-file: ubuntu-archive-keyring.gpg
     suite: {{ $suite }}
     components:
       - main
@@ -94,35 +94,66 @@ actions:
 
     # Mainline hardware specific packages
   - action: apt
+    description: Basic packages
     packages:
       - bash-completion
-      - network-manager
       - vim
       - u-boot-tools
+      - alsa-utils
+      - git
+      - breeze-icon-theme
+      - python3
+      - linux-firmware
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+    # Desktop packages
+  - action: apt
+    description: Plama desktop packages
+    packages:
+      - sddm
       - kwin-x11
+      - plasma-minishell
+      - plasma-pa
+      - plasma-widgets-addons
+      - libkf5wallet-bin
+      - openssh-server
+      - ftp
+      - i2c-tools
+      - nano
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+    # Mycroft packages
+  - action: apt
+    description: Mycroft packages
+    packages:
       - mycroft-gui
       - mycroft-gui-mark-2
       - mycroft-settings
       - mycroft-skill-installer
-      - plasma-minishell
-      - plasma-nm
-      - plasma-pa
-      - plasma-widgets-addons
-      - plasma-workspace-wallpapers
-      - sddm
-      - ubuntu-minimal
-      - alsa-utils
-      - git
       - qml-module-org-kde-lottie
-      - libkf5wallet-bin
+      - plasma-workspace-wallpapers
+
+    # Todo ugly, revert me
+  - action: apt
+    description: Networking packages
+    packages:
+      - network-manager
+      - plasma-nm
+      - ubuntu-minimal
 
   - action: overlay
-    source: overlay
+    source: pineh64
 
   - action: run
     description: Set up user account
     chroot: true
-    script: scripts/02-setup_respeaker_user.sh
+    script: scripts/02-setup_pine_user.sh
 
   - action: run
     description: remove zfs
@@ -146,7 +177,7 @@ actions:
   - action: run
     description: Set hostname
     chroot: true
-    command: echo debian-device > /etc/hostname
+    command: echo pineh64 > /etc/hostname
 
   - action: run
     description: Compile u-boot script
