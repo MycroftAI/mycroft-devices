@@ -199,6 +199,16 @@ actions:
     offset: 8192
 
   - action: run
+    description: Creating ramdisk
+    chroot: true
+    script: scripts/93-create_ramdisk.sh
+
+  - action: run
+    description: Creating swap file
+    chroot: true
+    script: scripts/94-create_swap.sh
+
+  - action: run
     description: Create bmap file
     postprocess: true
     command: bmaptool create {{ $image }} > {{ $image }}.img.bmap
