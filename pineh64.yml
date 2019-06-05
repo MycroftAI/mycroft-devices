@@ -34,17 +34,7 @@ actions:
       - curl
       - apt-transport-https
       - software-properties-common
-
-  - action: apt
-    description: Mycroft runtime dependencies
-    packages:
-      - pcre2-utils
-      - portaudio19-dev
-      - jq
-      - mpg123
-      - libfann-dev
-      - flac
-  
+ 
   - action: run
     description: Add KDE Neon gpg key
     chroot: true
@@ -118,6 +108,20 @@ actions:
     label: depmod
     command: depmod
 
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+  - action: apt
+    description: Mycroft runtime dependencies
+    packages:
+      - pcre2-utils
+      - portaudio19-dev
+      - jq
+      - mpg123
+      - libfann-dev
+      - flac
+ 
   - action: overlay
     description: fix DNS inside container
     source: resolv
