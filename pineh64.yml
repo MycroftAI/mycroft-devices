@@ -88,6 +88,30 @@ actions:
     source: .
     destination: /var/tmp/u-boot-sunxi-with-spl.bin
 
+  - action: download
+    url: http://frozenmazegames.se/mycroft-core-setup-aarch64.tar.gz
+    name: mycroft-core
+    filename: mycroft-core-setup-aarch64.tar.gz
+
+  - action: overlay
+    origin: mycroft-core
+    source: .
+    destination: /var/tmp/mycroft-core-setup-aarch64.tar.gz
+
+  - action: download
+    url: http://frozenmazegames.se/mimic-arm64_1.2.0.2+1559651054-1.deb
+    name: mimic
+    filename: mimic-arm64_1.2.0.2+1559651054-1.deb
+
+  - action: overlay
+    origin: mimic
+    source: .
+    destination: /var/tmp/mimic-arm64_1.2.0.2+1559651054-1.deb
+
+  - action: overlay
+    source: pineh64
+    destination: /
+
     # Mainline hardware specific packages
   - action: apt
     description: Basic packages
@@ -177,6 +201,11 @@ actions:
     description: Set up system locale
     chroot: true
     script: scripts/03-setup_locale.sh
+
+  - action: run
+    description: Install mycroft base software
+    chroot: true
+    script: scripts/92-clone-mycroft.sh
 
   - action: run
     description: remove zfs
