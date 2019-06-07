@@ -88,10 +88,6 @@ actions:
     source: .
     destination: /var/tmp/u-boot-sunxi-with-spl.bin
 
-  - action: overlay
-    source: pineh64
-    destination: /
-
     # Mainline hardware specific packages
   - action: apt
     description: Basic packages
@@ -149,6 +145,7 @@ actions:
 
   - action: overlay
     source: pineh64
+    destination: /
 
   - action: run
     description: Set up user account
