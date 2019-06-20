@@ -108,6 +108,10 @@ actions:
     source: .
     destination: /var/tmp/mimic-arm64_1.2.0.2+1559651054-1.deb
 
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
     # Mainline hardware specific packages
   - action: apt
     description: Basic packages
@@ -117,7 +121,6 @@ actions:
       - u-boot-tools
       - alsa-utils
       - git
-      - breeze-icon-theme
       - python3
       - linux-firmware
       - kmod
@@ -141,6 +144,7 @@ actions:
       - mpg123
       - libfann-dev
       - flac
+      - breeze-icon-theme
  
   - action: overlay
     description: fix DNS inside container
