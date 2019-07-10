@@ -58,7 +58,7 @@ actions:
     # Hardware specific parts
   - action: download
     description: Fetch latest kernel ci build
-    url: http://files.xenon.pangea.pub/pineh64/archive.zip
+    url: https://files.xenon.pangea.pub/pineh64/archive.zip
     name: kernel
     filename: kernel.zip
     unpack: true
@@ -74,11 +74,11 @@ actions:
     chroot: true
     description: Install kernel
     label: dpkg
-    command: dpkg -i /var/tmp/*.deb && rm /var/tmp/* -r
+    command: dpkg -i /var/tmp/*.deb && cd /lib/modules/*-mycroft && mkdir extra && cp /var/tmp/mali_kbase.ko extra/ && rm /var/tmp/* -r
 
   - action: download
     description: Fetch u-boot build
-    url: http://files.xenon.pangea.pub/pineh64/u-boot-sunxi-with-spl.bin
+    url: https://files.xenon.pangea.pub/pineh64/u-boot-sunxi-with-spl.bin
     name: u-boot
     filename: u-boot-sunxi-with-spl.bin
     unpack: false
