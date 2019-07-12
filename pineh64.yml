@@ -129,7 +129,7 @@ actions:
     chroot: true
     description: Run depmod for extra module
     label: depmod
-    command: depmod
+    command: depmod $(ls /lib/modules/)
 
   - action: overlay
     description: fix DNS inside container
