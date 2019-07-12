@@ -34,7 +34,6 @@ actions:
       - curl
       - apt-transport-https
       - software-properties-common
-      - kmod
   
   - action: run
     description: Add KDE Neon gpg key
@@ -76,12 +75,6 @@ actions:
     description: Install kernel
     label: dpkg
     command: dpkg -i /var/tmp/*.deb && cd /lib/modules/*-mycroft && mkdir extra && cp /var/tmp/mali_kbase.ko extra/ && rm /var/tmp/* -r
-
-  - action: run
-    chroot: true
-    description: Run depmod for extra module
-    label: depmod
-    command: depmod
 
   - action: download
     description: Fetch u-boot build
