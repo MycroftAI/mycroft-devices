@@ -124,6 +124,7 @@ actions:
       - python3
       - linux-firmware
       - kmod
+      - bzip2
 
   - action: run
     chroot: true
@@ -168,6 +169,20 @@ actions:
   - action: overlay
     description: fix DNS inside container
     source: resolv
+
+    # Wayland drivers
+  - action: download
+    description: Fetch latest wayland drivers blob
+    url: http://files.pine64.org/os/sdk/H64-ver1.1/mali-t720-r18p0-01rel0-um-018-linux-opengles-release-wayland-server-gbm-composer-arm64-glibc.tar.bz2
+    name: wayland
+    filename: wayland.tar.bz2
+    unpack: true
+    compression: bzip2
+
+  - action: overlay
+    origin: wayland
+    source: .
+    destination: /usr/lib/aarch64-linux-gnu/mali-egl/
 
     # Mycroft packages
   - action: apt
