@@ -155,7 +155,8 @@ actions:
     description: Plama desktop packages
     packages:
       - sddm
-      - kwin-x11
+      - kwin-wayland
+      - plasma-workspace-wayland
       - plasma-minishell
       - plasma-pa
       - plasma-widgets-addons
@@ -191,7 +192,6 @@ actions:
       - mycroft-settings
       - mycroft-skill-installer
       - qml-module-org-kde-lottie
-      - plasma-workspace-wallpapers
 
     # Todo ugly, revert me
   - action: apt
