@@ -164,6 +164,7 @@ actions:
       - openssh-server
       - ftp
       - i2c-tools
+      - konsole
       - nano
       - gstreamer1.0-plugins-good
       - gstreamer1.0-plugins-bad
