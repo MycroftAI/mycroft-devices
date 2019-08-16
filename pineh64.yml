@@ -152,29 +152,42 @@ actions:
 
     # Desktop packages
   - action: apt
-    description: Plama desktop packages
+    description: Base packages
     packages:
       - sddm
       - kwin-wayland
-      - plasma-workspace-wayland
-      - plasma-minishell
-      - plasma-pa
-      - plasma-widgets-addons
-      - libkf5wallet-bin
       - openssh-server
       - ftp
       - i2c-tools
       - konsole
       - nano
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+    # Desktop packages
+  - action: apt
+    description: Plasma packages
+    packages:
+      - plasma-workspace-wayland
+      - plasma-minishell
+      - plasma-pa
+      - plasma-widgets-addons
+      - libkf5wallet-bin
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+  - action: apt
+    description: Gstreamer packages
+    packages:
       - gstreamer1.0-plugins-good
       - gstreamer1.0-plugins-bad
       - gstreamer1.0-libav
       - gstreamer1.0-fluendo-mp3
       - qml-module-qtmultimedia
-
-  - action: overlay
-    description: fix DNS inside container
-    source: resolv
 
     # Wayland drivers
   - action: download
