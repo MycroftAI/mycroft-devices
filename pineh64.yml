@@ -74,7 +74,7 @@ actions:
     chroot: true
     description: Install kernel
     label: dpkg
-    command: dpkg -i /var/tmp/*.deb && cd /lib/modules/*-mycroft && mkdir extra && cp /var/tmp/mali_kbase.ko extra/ && rm /var/tmp/* -r
+    command: dpkg -i /var/tmp/*.deb && cd /lib/modules/*-pine64* && mkdir extra && cp /var/tmp/mali_kbase.ko extra/ && rm /var/tmp/* -r
 
   - action: download
     description: Fetch u-boot build
