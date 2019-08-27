@@ -5,7 +5,7 @@ GECOS=pine
 UGID=32011
 PASSWORD=mycroft
 
-DEFGROUPS="tty,sudo,adm,dialout,cdrom,plugdev,audio,dip,video"
+DEFGROUPS="tty,sudo,adm,dialout,cdrom,plugdev,audio,dip,video,i2c"
 
 echo "I: creating default user $USER"
 adduser --gecos $GECOS --disabled-login $USER --uid $UGID

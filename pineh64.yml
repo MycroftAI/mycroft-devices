@@ -34,7 +34,7 @@ actions:
       - curl
       - apt-transport-https
       - software-properties-common
-  
+ 
   - action: run
     description: Add KDE Neon gpg key
     chroot: true
@@ -74,7 +74,7 @@ actions:
     chroot: true
     description: Install kernel
     label: dpkg
-    command: dpkg -i /var/tmp/*.deb && cd /lib/modules/*-mycroft && mkdir extra && cp /var/tmp/mali_kbase.ko extra/ && rm /var/tmp/* -r
+    command: dpkg -i /var/tmp/*.deb && cd /lib/modules/*-pine64* && mkdir extra && cp /var/tmp/mali_kbase.ko extra/ && rm /var/tmp/* -r
 
   - action: download
     description: Fetch u-boot build
@@ -88,6 +88,30 @@ actions:
     source: .
     destination: /var/tmp/u-boot-sunxi-with-spl.bin
 
+  - action: download
+    url: http://frozenmazegames.se/mycroft-core-setup-aarch64.tar.gz
+    name: mycroft-core
+    filename: mycroft-core-setup-aarch64.tar.gz
+
+  - action: overlay
+    origin: mycroft-core
+    source: .
+    destination: /var/tmp/mycroft-core-setup-aarch64.tar.gz
+
+  - action: download
+    url: http://frozenmazegames.se/mimic-arm64_1.2.0.2+1559651054-1.deb
+    name: mimic
+    filename: mimic-arm64_1.2.0.2+1559651054-1.deb
+
+  - action: overlay
+    origin: mimic
+    source: .
+    destination: /var/tmp/mimic-arm64_1.2.0.2+1559651054-1.deb
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
     # Mainline hardware specific packages
   - action: apt
     description: Basic packages
@@ -97,7 +121,6 @@ actions:
       - u-boot-tools
       - alsa-utils
       - git
-      - breeze-icon-theme
       - python3
       - linux-firmware
       - kmod
@@ -106,7 +129,38 @@ actions:
     chroot: true
     description: Run depmod for extra module
     label: depmod
-    command: depmod
+    command: depmod $(ls /lib/modules/)
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+  - action: apt
+    description: Mycroft runtime dependencies
+    packages:
+      - pcre2-utils
+      - portaudio19-dev
+      - jq
+      - mpg123
+      - libfann-dev
+      - flac
+      - breeze-icon-theme
+ 
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+    # Desktop packages
+  - action: apt
+    description: Base packages
+    packages:
+      - sddm
+      - kwin-wayland
+      - openssh-server
+      - ftp
+      - i2c-tools
+      - konsole
+      - nano
 
   - action: overlay
     description: fix DNS inside container
@@ -114,22 +168,39 @@ actions:
 
     # Desktop packages
   - action: apt
-    description: Plama desktop packages
+    description: Plasma packages
     packages:
-      - sddm
-      - kwin-x11
+      - plasma-workspace-wayland
       - plasma-minishell
       - plasma-pa
       - plasma-widgets-addons
       - libkf5wallet-bin
-      - openssh-server
-      - ftp
-      - i2c-tools
-      - nano
 
   - action: overlay
     description: fix DNS inside container
     source: resolv
+
+  - action: apt
+    description: Gstreamer packages
+    packages:
+      - gstreamer1.0-plugins-good
+      - gstreamer1.0-plugins-bad
+      - gstreamer1.0-libav
+      - gstreamer1.0-fluendo-mp3
+      - qml-module-qtmultimedia
+
+    # Wayland drivers
+  - action: download
+    description: Fetch latest wayland drivers blob
+    url: https://files.xenon.pangea.pub/pineh64/mali-t720-r18p0-01rel0-um-018-linux-opengles-release-wayland-server-gbm-composer-arm64-glibc.tar.gz
+    name: wayland
+    filename: wayland.tar.bz2
+    unpack: true
+
+  - action: overlay
+    origin: wayland
+    source: .
+    destination: /usr/lib/aarch64-linux-gnu/mali-egl/
 
     # Mycroft packages
   - action: apt
@@ -140,7 +211,6 @@ actions:
       - mycroft-settings
       - mycroft-skill-installer
       - qml-module-org-kde-lottie
-      - plasma-workspace-wallpapers
 
     # Todo ugly, revert me
   - action: apt
@@ -163,6 +233,11 @@ actions:
     description: Set up system locale
     chroot: true
     script: scripts/03-setup_locale.sh
+
+  - action: run
+    description: Install mycroft base software
+    chroot: true
+    script: scripts/92-clone-mycroft.sh
 
   - action: run
     description: remove zfs
