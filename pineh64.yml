@@ -135,6 +135,12 @@ actions:
     description: fix DNS inside container
     source: resolv
 
+  - action: run
+    chroot: true
+    description: Run apt clean
+    label: apt-clean
+    command: apt clean
+
   - action: apt
     description: Mycroft runtime dependencies
     packages:
@@ -142,6 +148,10 @@ actions:
       - portaudio19-dev
       - jq
       - mpg123
+
+  - action: apt
+    description: Mycroft runtime dependencies
+    packages:
       - libfann-dev
       - flac
       - breeze-icon-theme
