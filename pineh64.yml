@@ -58,7 +58,7 @@ actions:
     # Hardware specific parts
   - action: download
     description: Fetch latest kernel ci build
-    url: https://files.xenon.pangea.pub/pineh64/archive.zip
+    url: https://frozenmazegames.se/archive.zip
     name: kernel
     filename: kernel.zip
     unpack: true
