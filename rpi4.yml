@@ -5,6 +5,15 @@
 architecture: {{ $architecture }}
 
 actions:
+    # Hardware specific parts
+  - action: download
+    description: Fetch latest kernel ci build
+    url: https://arm.bshah.in/linux-pi4.zip
+    name: kernel
+    filename: kernel.zip
+    unpack: true
+    compression: zip
+
   - action: debootstrap
     keyring-package: ubuntu-keyring
     keyring-file: ubuntu-archive-keyring.gpg
@@ -54,15 +63,6 @@ actions:
     description: Add xneon apt repo
     chroot: true
     command: echo "deb http://archive.xenon.pangea.pub/unstable bionic main" > /etc/apt/sources.list.d/xenon.list
-
-    # Hardware specific parts
-  - action: download
-    description: Fetch latest kernel ci build
-    url: https://arm.bshah.in/linux-pi4.zip
-    name: kernel
-    filename: kernel.zip
-    unpack: true
-    compression: zip
 
   - action: overlay
     origin: kernel
