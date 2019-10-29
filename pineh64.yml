@@ -58,7 +58,7 @@ actions:
     # Hardware specific parts
   - action: download
     description: Fetch latest kernel ci build
-    url: https://files.xenon.pangea.pub/pineh64/archive.zip
+    url: https://frozenmazegames.se/archive.zip
     name: kernel
     filename: kernel.zip
     unpack: true
@@ -135,6 +135,12 @@ actions:
     description: fix DNS inside container
     source: resolv
 
+  - action: run
+    chroot: true
+    description: Run apt clean
+    label: apt-clean
+    command: apt clean
+
   - action: apt
     description: Mycroft runtime dependencies
     packages:
@@ -142,6 +148,10 @@ actions:
       - portaudio19-dev
       - jq
       - mpg123
+
+  - action: apt
+    description: Mycroft runtime dependencies
+    packages:
       - libfann-dev
       - flac
       - breeze-icon-theme
