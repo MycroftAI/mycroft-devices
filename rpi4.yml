@@ -1,0 +1,132 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{ $suite :=  "bionic" }}
+{{- $image := or .image "mycroft-rpi4.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: debootstrap
+    keyring-package: ubuntu-keyring
+    keyring-file: ubuntu-archive-keyring.gpg
+    suite: {{ $suite }}
+    components:
+      - main
+      - restricted
+      - multiverse
+      - universe
+    mirror: http://ports.ubuntu.com/ubuntu-ports
+    variant: minbase
+
+  - action: run
+    description: Add bionic-updates apt repo
+    chroot: true
+    command: echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-updates main restricted multiverse universe" >> /etc/apt/sources.list
+
+  - action: run
+    description: Add bionic-backports apt repo
+    chroot: true
+    command: echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-backports main restricted multiverse universe" >> /etc/apt/sources.list
+
+  - action: apt
+    packages:
+      - gnupg
+      - wget
+      - curl
+      - apt-transport-https
+      - software-properties-common
+ 
+  - action: run
+    description: Add KDE Neon gpg key
+    chroot: true
+    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys '444D ABCF 3667 D028 3F89  4EDD E6D4 7362 5575 1E5D'
+
+  - action: run
+    description: Add Xenon gpg key
+    chroot: true
+    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 'CB87 A99C D05E 5E0C 7017  4A68 E8AF 1B0B 45D8 3EBD'
+
+  - action: run
+    description: Add neon apt repo
+    chroot: true
+    command: echo "deb https://archive.neon.kde.org/unstable bionic main" > /etc/apt/sources.list.d/neon.list
+
+  - action: run
+    description: Add xneon apt repo
+    chroot: true
+    command: echo "deb http://archive.xenon.pangea.pub/unstable bionic main" > /etc/apt/sources.list.d/xenon.list
+
+    # Hardware specific parts
+  - action: download
+    description: Fetch latest kernel ci build
+    url: https://arm.bshah.in/linux-pi4.zip
+    name: kernel
+    filename: kernel.zip
+    unpack: true
+    compression: zip
+
+  - action: overlay
+    origin: kernel
+    source: .
+    destination: /var/tmp/
+
+  - action: run
+    origin: kernel
+    chroot: true
+    description: Install kernel
+    label: dpkg
+    command: dpkg -i /var/tmp/*.deb && rm /var/tmp/* -r
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+    # Mainline hardware specific packages
+  - action: apt
+    description: Basic packages
+    packages:
+      - bash-completion
+      - vim
+      - alsa-utils
+      - git
+      - python3
+      - linux-firmware
+      - kmod
+
+  - action: image-partition
+    imagename: {{ $image }}
+    imagesize: 8GB
+    partitiontype: msdos
+    mountpoints:
+      - mountpoint: /
+        partition: ROOTFS
+      - mountpoint: /boot
+        partition: BOOT
+    partitions:
+      - name: BOOT
+        fs: fat32
+        start: 32768s
+        end: 237567s
+        flags: [ boot ]
+      - name: ROOTFS
+        fs: ext4
+        start: 237568s
+        end: 100%
+        flags: [ boot ]
+
+  - action: run
+    description: Set hostname
+    chroot: true
+    command: echo raspberrypi4 > /etc/hostname
+
+  - action: filesystem-deploy
+    description: Deploying filesystem into image
+
+  - action: run
+    description: Create bmap file
+    postprocess: true
+    command: bmaptool create {{ $image }} > {{ $image }}.img.bmap
+
+  - action: run
+    description: Compress image
+    postprocess: true
+    command: gzip -f9 {{ $image }}
