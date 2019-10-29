@@ -55,10 +55,6 @@ actions:
     chroot: true
     command: echo "deb http://archive.xenon.pangea.pub/unstable bionic main" > /etc/apt/sources.list.d/xenon.list
 
-  - action: overlay
-    description: fix DNS inside container
-    source: resolv
-
     # Hardware specific parts
   - action: download
     description: Fetch latest kernel ci build
