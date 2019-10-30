@@ -135,20 +135,19 @@ actions:
     partitiontype: msdos
     mountpoints:
       - mountpoint: /
-        partition: ROOTFS
+        partition: root
       - mountpoint: /boot/firmware
-        partition: BOOT
+        partition: firmware
+        options: [ x-systemd.automount ]
     partitions:
-      - name: BOOT
+      - name: firmware
         fs: fat32
-        start: 32768s
-        end: 237567s
-        flags: [ boot ]
-      - name: ROOTFS
+        start: 0%
+        end: 64MB
+      - name: root
         fs: ext4
-        start: 237568s
+        start: 64MB
         end: 100%
-        flags: [ boot ]
 
   - action: run
     description: Set hostname
