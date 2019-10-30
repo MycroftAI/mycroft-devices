@@ -96,6 +96,21 @@ actions:
       - python3
       - kmod
 
+  - action: run
+    description: Set up user account
+    chroot: true
+    script: scripts/02-setup_pi_user.sh
+
+  - action: run
+    description: Set up system locale
+    chroot: true
+    script: scripts/03-setup_locale.sh
+
+  - action: run
+    description: remove zfs
+    chroot: true
+    script: scripts/051-zfs.sh
+
   - action: image-partition
     imagename: {{ $image }}
     imagesize: 8GB
