@@ -77,9 +77,9 @@ actions:
     command: dpkg -i /var/tmp/*.deb && rm /var/tmp/* -r
 
   - action: run
-    description: Copy kernel and dtb to boot partition
+    description: Copy kernel and dtb to boot firmware partition
     chroot: true
-    command: mkdir -p /boot/overlays && cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot && cp -v /usr/lib/linux-image-*/overlays/* /boot/overlays/
+    command: mkdir -p /boot/overlays && cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot/firmware && cp -v /usr/lib/linux-image-*/overlays/* /boot/firmware/overlays/
 
   - action: overlay
     description: fix DNS inside container
@@ -103,7 +103,7 @@ actions:
     mountpoints:
       - mountpoint: /
         partition: ROOTFS
-      - mountpoint: /boot
+      - mountpoint: /boot/firmware
         partition: BOOT
     partitions:
       - name: BOOT
