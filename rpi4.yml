@@ -119,6 +119,13 @@ actions:
       - kmod
       - i2c-tools
 
+    # Todo ugly, revert me
+  - action: apt
+    description: Networking packages
+    packages:
+      - network-manager
+      - ubuntu-minimal
+
   - action: overlay
     source: rpi4
     destination: /
