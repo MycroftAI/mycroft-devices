@@ -97,7 +97,7 @@ actions:
   - action: run
     description: Copy dtb to boot firmware partition
     chroot: true
-    command: cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot/firmware && cp -v /usr/lib/linux-image-*/overlays/* /boot/firmware/overlays/
+    command: mkdir -p /boot/firmware/overlays && cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot/firmware && cp -v /usr/lib/linux-image-*/overlays/* /boot/firmware/overlays/
 
   - action: overlay
     source: rpi4-config
