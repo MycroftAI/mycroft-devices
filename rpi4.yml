@@ -103,6 +103,16 @@ actions:
     source: rpi4-config
     destination: /boot/firmware
 
+  - action: run
+    description: Copy kernel to where bootloader expects it
+    chroot: true
+    command: cp /boot/Image.gz /boot/firmware/kernel8.img
+
+  - action: run
+    description: Copy kernel to where bootloader expects it
+    chroot: true
+    command: cp /boot/Image.gz /boot/kernel8.img
+
   - action: overlay
     description: fix DNS inside container
     source: resolv
