@@ -100,6 +100,10 @@ actions:
     command: cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot/firmware && cp -v /usr/lib/linux-image-*/overlays/* /boot/firmware/overlays/
 
   - action: overlay
+    source: rpi4-config
+    destination: /boot/firmware
+
+  - action: overlay
     description: fix DNS inside container
     source: resolv
 
