@@ -95,7 +95,7 @@ actions:
     command: dpkg -i /var/tmp/*.deb && rm /var/tmp/* -r
 
   - action: run
-    description: Copy kernel and dtb to boot firmware partition
+    description: Copy dtb to boot firmware partition
     chroot: true
     command: cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot/firmware && cp -v /usr/lib/linux-image-*/overlays/* /boot/firmware/overlays/
 
