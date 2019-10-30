@@ -118,6 +118,10 @@ actions:
       - python3
       - kmod
 
+  - action: overlay
+    source: rpi4
+    destination: /
+
   - action: run
     description: Set up user account
     chroot: true
