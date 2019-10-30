@@ -76,6 +76,11 @@ actions:
     label: dpkg
     command: dpkg -i /var/tmp/*.deb && rm /var/tmp/* -r
 
+  - action: run
+    description: Copy kernel and dtb to boot partition
+    chroot: true
+    command: mkdir -p /boot/overlays && cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot && cp -v /usr/lib/linux-image-*/overlays/* /boot/overlays/
+
   - action: overlay
     description: fix DNS inside container
     source: resolv
@@ -89,7 +94,6 @@ actions:
       - alsa-utils
       - git
       - python3
-      - linux-firmware
       - kmod
 
   - action: image-partition
