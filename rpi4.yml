@@ -8,7 +8,7 @@ actions:
     # Hardware specific parts
   - action: download
     description: Fetch latest kernel ci build
-    url: https://arm.bshah.in/linux-pi4.zip
+    url: https://bshah.in/linux-pi4.zip
     name: kernel
     filename: kernel.zip
     unpack: true
