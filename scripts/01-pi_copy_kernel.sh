@@ -1,3 +1,5 @@
+#!/bin/sh -x
+
 cd /boot
 
 cp /boot/Image.gz-* /boot/firmware/kernel8.bin.gz
