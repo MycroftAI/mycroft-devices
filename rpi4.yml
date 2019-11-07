@@ -68,9 +68,19 @@ actions:
     command: echo "deb https://archive.neon.kde.org/unstable bionic main" > /etc/apt/sources.list.d/neon.list
 
   - action: run
-    description: Add xneon apt repo
+    description: Add xenon apt repo
     chroot: true
     command: echo "deb http://archive.xenon.pangea.pub/unstable bionic main" > /etc/apt/sources.list.d/xenon.list
+
+  - action: run
+    description: Add ubuntu-x-swat ppa
+    chroot: true
+    command: add-apt-repository ppa:ubuntu-x-swat/updates -yn
+
+  - action: run
+    description: Add ubuntu-raspi2 ppa
+    chroot: true
+    command: add-apt-repository ppa:ubuntu-raspi2/ppa -yn
 
   - action: overlay
     origin: kernel
@@ -119,6 +129,57 @@ actions:
       - kmod
       - linux-firmware
       - i2c-tools
+
+    # Desktop packages
+  - action: apt
+    description: Base packages
+    packages:
+      - sddm
+      - kwin-wayland
+      - openssh-server
+      - ftp
+      - i2c-tools
+      - konsole
+      - nano
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+    # Desktop packages
+  - action: apt
+    description: Plasma packages
+    packages:
+      - plasma-workspace-wayland
+      - plasma-minishell
+      - plasma-pa
+      - plasma-nm
+      - plasma-widgets-addons
+      - libkf5wallet-bin
+
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
+  - action: apt
+    description: Gstreamer packages
+    packages:
+      - gstreamer1.0-plugins-good
+      - gstreamer1.0-plugins-bad
+      - gstreamer1.0-libav
+      - gstreamer1.0-fluendo-mp3
+      - qml-module-qtmultimedia
+
+    # Mycroft packages
+  - action: apt
+    description: Mycroft packages
+    packages:
+      - mycroft-gui
+      - mycroft-gui-mark-2
+      - mycroft-settings
+      - mycroft-skill-installer
+      - qml-module-org-kde-lottie
+
 
     # Todo ugly, revert me
   - action: apt
