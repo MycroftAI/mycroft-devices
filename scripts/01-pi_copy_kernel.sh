@@ -1,6 +1,6 @@
 #!/bin/sh -x
 
 cd /boot
-ls -l
-gunzip Image.gz
-cp Image /boot/firmware/kernel8.bin
+
+cp /boot/Image.gz-* /boot/firmware/kernel8.bin.gz
+gunzip /boot/firmware/kernel8.bin.gz
