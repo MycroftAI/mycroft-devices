@@ -106,7 +106,7 @@ actions:
   - action: run
     description: Copy kernel to where bootloader expects it
     chroot: true
-    command: cp /boot/Image /boot/firmware/kernel8.img
+    command: scripts/01-pi_copy_kernel.sh
 
   - action: overlay
     description: fix DNS inside container
