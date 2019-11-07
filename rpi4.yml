@@ -134,7 +134,7 @@ actions:
   - action: run
     description: Copy kernel to where bootloader expects it
     chroot: true
-    command: scripts/01-pi_copy_kernel.sh
+    script: scripts/01-pi_copy_kernel.sh
 
   - action: run
     description: Set up user account
