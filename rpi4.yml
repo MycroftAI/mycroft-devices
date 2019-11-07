@@ -113,6 +113,26 @@ actions:
     source: rpi4-config
     destination: /boot/firmware
 
+  - action: download
+    url: http://frozenmazegames.se/mycroft-core-setup-aarch64.tar.gz
+    name: mycroft-core
+    filename: mycroft-core-setup-aarch64.tar.gz
+
+  - action: overlay
+    origin: mycroft-core
+    source: .
+    destination: /var/tmp/mycroft-core-setup-aarch64.tar.gz
+
+  - action: download
+    url: http://frozenmazegames.se/mimic-arm64_1.2.0.2+1559651054-1.deb
+    name: mimic
+    filename: mimic-arm64_1.2.0.2+1559651054-1.deb
+
+  - action: overlay
+    origin: mimic
+    source: .
+    destination: /var/tmp/mimic-arm64_1.2.0.2+1559651054-1.deb
+
   - action: overlay
     description: fix DNS inside container
     source: resolv
@@ -129,6 +149,27 @@ actions:
       - kmod
       - linux-firmware
       - i2c-tools
+
+  - action: run
+    chroot: true
+    description: Run apt clean
+    label: apt-clean
+    command: apt clean
+
+  - action: apt
+    description: Mycroft runtime dependencies
+    packages:
+      - pcre2-utils
+      - portaudio19-dev
+      - jq
+      - mpg123
+
+  - action: apt
+    description: Mycroft runtime dependencies
+    packages:
+      - libfann-dev
+      - flac
+      - breeze-icon-theme
 
     # Desktop packages
   - action: apt
@@ -206,6 +247,11 @@ actions:
     description: Set up system locale
     chroot: true
     script: scripts/03-setup_locale.sh
+
+  - action: run
+    description: Install mycroft base software
+    chroot: true
+    script: scripts/92-clone-mycroft.sh
 
   - action: run
     description: remove zfs
