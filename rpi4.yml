@@ -152,6 +152,12 @@ actions:
 
   - action: run
     chroot: true
+    description: Run depmod for extra module
+    label: depmod
+    command: depmod $(ls /lib/modules/)
+
+  - action: run
+    chroot: true
     description: Run apt clean
     label: apt-clean
     command: apt clean
@@ -171,6 +177,10 @@ actions:
       - flac
       - breeze-icon-theme
 
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
     # Desktop packages
   - action: apt
     description: Base packages
@@ -183,10 +193,6 @@ actions:
       - konsole
       - nano
 
-  - action: overlay
-    description: fix DNS inside container
-    source: resolv
-
     # Desktop packages
   - action: apt
     description: Plasma packages
@@ -194,7 +200,6 @@ actions:
       - plasma-workspace-wayland
       - plasma-minishell
       - plasma-pa
-      - plasma-nm
       - plasma-widgets-addons
       - libkf5wallet-bin
 
@@ -227,6 +232,7 @@ actions:
     description: Networking packages
     packages:
       - network-manager
+      - plasma-nm
       - ubuntu-minimal
 
   - action: overlay
