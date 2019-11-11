@@ -193,6 +193,10 @@ actions:
       - konsole
       - nano
 
+  - action: overlay
+    description: fix DNS inside container
+    source: resolv
+
     # Desktop packages
   - action: apt
     description: Plasma packages
