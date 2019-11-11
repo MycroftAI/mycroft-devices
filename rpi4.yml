@@ -22,6 +22,12 @@ actions:
     unpack: true
     name: firmware
 
+  - action: download
+    description: Download latest version of the nonfree firmware from GitHub
+    url: https://github.com/RPi-Distro/firmware-nonfree/archive/master.tar.gz
+    unpack: true
+    name: firmwarenonfree
+
   - action: debootstrap
     keyring-package: ubuntu-keyring
     keyring-file: ubuntu-archive-keyring.gpg
@@ -161,6 +167,16 @@ actions:
     description: Run apt clean
     label: apt-clean
     command: apt clean
+
+  - action: overlay
+    origin: firmwarenonfree
+    source: firmwarenonfree
+    destination: /var/tmp
+
+  - action: run
+    description: Copy broadcom firmware
+    chroot: true
+    command: cp -r /var/tmp/brcm/brcmfmac43455-sdio.* /lib/firmware/brcm/
 
   - action: apt
     description: Mycroft runtime dependencies
