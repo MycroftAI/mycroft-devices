@@ -170,7 +170,7 @@ actions:
 
   - action: overlay
     origin: firmwarenonfree
-    source: firmware-nonfree
+    source: firmware-nonfree-master
     destination: /var/tmp
 
   - action: run
