@@ -267,7 +267,7 @@ actions:
   - action: run
     description: Set up user account
     chroot: true
-    script: scripts/02-setup_pi_user.sh
+    script: scripts/02-setup_mycroft_user.sh
 
   - action: run
     description: Set up system locale
