@@ -201,6 +201,7 @@ actions:
   - action: apt
     description: Base packages
     packages:
+      - xauth
       - sddm
       - kwin-wayland
       - openssh-server
