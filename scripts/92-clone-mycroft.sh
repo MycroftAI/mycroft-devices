@@ -1,5 +1,5 @@
 UGID=32011
-USER=pine
+USER=mycroft
 
 # Unpack mycroft-core-setup-aarch64.tar.gz to user home
 tar -xzf /var/tmp/mycroft-core-setup-aarch64.tar.gz -C /home/$USER/
