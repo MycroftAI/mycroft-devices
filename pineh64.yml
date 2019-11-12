@@ -181,7 +181,7 @@ actions:
     description: Plasma packages
     packages:
       - plasma-workspace-wayland
-      - plasma-minishell
+      - plasma-nano
       - plasma-pa
       - plasma-widgets-addons
       - libkf5wallet-bin

@@ -74,7 +74,7 @@ actions:
       - mycroft-gui-mark-2
       - mycroft-settings
       - mycroft-skill-installer
-      - plasma-minishell
+      - plasma-nano
       - plasma-nm
       - plasma-pa
       - plasma-widgets-addons
