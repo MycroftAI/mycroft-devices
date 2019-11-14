@@ -155,6 +155,7 @@ actions:
       - kmod
       - linux-firmware
       - i2c-tools
+      - rng-tools5
 
   - action: run
     chroot: true
