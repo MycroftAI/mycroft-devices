@@ -237,6 +237,7 @@ actions:
       - gstreamer1.0-libav
       - gstreamer1.0-fluendo-mp3
       - qml-module-qtmultimedia
+      - libqt5multimedia5-plugins
 
     # Mycroft packages
   - action: apt
