@@ -1,0 +1,18 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $firmware_version := or .firmware_version "master" -}}
+{{ $suite :=  or .suite "bionic" }}
+{{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: run
+    description: Add KDE Neon gpg key
+    chroot: true
+    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys '444D ABCF 3667 D028 3F89  4EDD E6D4 7362 5575 1E5D'
+
+  - action: run
+    description: Add neon apt repo
+    chroot: true
+    command: echo "deb https://archive.neon.kde.org/unstable bionic main" > /etc/apt/sources.list.d/neon.list
+

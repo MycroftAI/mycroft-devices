@@ -1,0 +1,2 @@
+dtb=sun50i-h6-pine-h64.dtb
+cmdline=quiet init=/lib/systemd/systemd
