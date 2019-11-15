@@ -42,6 +42,7 @@ actions:
       - plasma-pa
       - plasma-widgets-addons
       - libkf5wallet-bin
+      - kscreen
 
   - action: overlay
     description: fix DNS inside container
