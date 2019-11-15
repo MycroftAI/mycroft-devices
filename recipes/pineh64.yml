@@ -72,9 +72,7 @@ actions:
     label: mkimage
     command: mkimage -A arm -O linux -T script -C none -n "U-Boot boot script" -d /boot/boot.txt /boot/boot.scr
 
-  - action: filesystem-deploy
-    description: Deploying filesystem into image
-
+#TODO after filesystem?
   - action: raw
     origin: filesystem
     source: /var/tmp/u-boot-sunxi-with-spl.bin

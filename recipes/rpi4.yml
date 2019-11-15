@@ -110,5 +110,3 @@ actions:
     chroot: true
     command: echo raspberrypi4 > /etc/hostname
 
-  - action: filesystem-deploy
-    description: Deploying filesystem into image

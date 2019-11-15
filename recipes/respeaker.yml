@@ -52,9 +52,7 @@ actions:
         end: 100%
         flags: [ boot ]
 
-  - action: filesystem-deploy
-    description: Deploying filesystem into image
-
+#TODO after filesystem?
   - action: raw
     origin: filesystem
     source: /opt/u-boot/respeakerv2/idbloader.img
