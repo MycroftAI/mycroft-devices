@@ -35,4 +35,6 @@ actions:
       - curl
       - apt-transport-https
       - software-properties-common
+      - linux-firmware
+      - kmod
 

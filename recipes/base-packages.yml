@@ -14,10 +14,6 @@ actions:
       - alsa-utils
       - git
       - python3
-      - kmod
-      - linux-firmware
-      - i2c-tools
-      - rng-tools5
 
     # Desktop packages
   - action: apt
@@ -31,6 +27,8 @@ actions:
       - i2c-tools
       - konsole
       - nano
+      - i2c-tools
+      - rng-tools5
 
   - action: overlay
     description: fix DNS inside container
