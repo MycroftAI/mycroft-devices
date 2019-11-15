@@ -1,3 +1,0 @@
-uname_r=4.4.138-respeaker-r0
-dtb=rk3229-respeaker-v2.dtb
-cmdline=coherent_pool=1M quiet init=/lib/systemd/systemd
