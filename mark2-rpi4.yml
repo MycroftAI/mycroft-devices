@@ -13,7 +13,15 @@ actions:
       firmware_version: {{ $firmware_version }}
       suite: {{ $suite }}
       image: {{ $image }}
-    
+
+  - action: recipe
+    recipe: recipes/rpi4.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
   - action: recipe
     recipe: recipes/neon-repo.yml
     variables:
@@ -56,14 +64,6 @@ actions:
 
   - action: recipe
     recipe: recipes/base-finalscripts.yml
-    variables:
-      architecture: {{ $architecture }}
-      firmware_version: {{ $firmware_version }}
-      suite: {{ $suite }}
-      image: {{ $image }}
-
-  - action: recipe
-    recipe: recipes/rpi4.yml
     variables:
       architecture: {{ $architecture }}
       firmware_version: {{ $firmware_version }}
