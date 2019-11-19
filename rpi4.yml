@@ -120,14 +120,14 @@ actions:
     destination: /boot/firmware
 
   - action: download
-    url: http://frozenmazegames.se/mycroft-core-setup-aarch64.tar.gz
+    url: https://github.com/MycroftAI/mycroft-core/archive/release/v19.8.3.tar.gz
     name: mycroft-core
-    filename: mycroft-core-setup-aarch64.tar.gz
+    filename: mycroft-core.tar.gz
 
   - action: overlay
     origin: mycroft-core
     source: .
-    destination: /var/tmp/mycroft-core-setup-aarch64.tar.gz
+    destination: /var/tmp/mycroft-core.tar.gz
 
   - action: download
     url: http://frozenmazegames.se/mimic-arm64_1.2.0.2+1559651054-1.deb
