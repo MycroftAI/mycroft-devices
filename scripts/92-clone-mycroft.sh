@@ -2,12 +2,15 @@ UGID=32011
 USER=mycroft
 
 # Unpack mycroft-core-setup-aarch64.tar.gz to user home
-tar -xzf /var/tmp/mycroft-core-setup-aarch64.tar.gz -C /home/$USER/
-rm /var/tmp/mycroft-core-setup-aarch64.tar.gz
+tar -xzf /var/tmp/mycroft-core.tar.gz -C /home/$USER/
+rm /var/tmp/mycroft-core.tar.gz
+cd /home/$USER/mycroft-core
 
 mkdir -p /opt/mycroft/skills
 mkdir -p /var/log/mycroft
 mkdir -p /home/$USER/.mycroft
+
+CI=true sudo -u $USER ./dev-setup.sh --skip-mimic
 
 # Install default skills
 #curl "https://raw.githubusercontent.com/MycroftAI/mycroft-skills/19.02/DEFAULT-SKILLS.respeaker" | grep -o '^[^#]*' | while read l; do

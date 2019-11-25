@@ -120,9 +120,9 @@ actions:
     destination: /boot/firmware
 
   - action: download
-    url: http://frozenmazegames.se/mycroft-core-setup-aarch64.tar.gz
+    url: https://github.com/MycroftAI/mycroft-core/archive/release/v19.8.3.tar.gz
     name: mycroft-core
-    filename: mycroft-core-setup-aarch64.tar.gz
+    filename: mycroft-core.tar.gz
 
   - action: overlay
     origin: mycroft-core
