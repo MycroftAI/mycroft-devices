@@ -17,8 +17,10 @@ enable_gic=1
 
 [pi4]
 dtoverlay=vc4-fkms-v3d
+dtparam=i2c_arm=on
 max_framebuffers=2
 arm_64bit=1
+
 
 [all]
 gpu_mem=320
