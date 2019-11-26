@@ -6,12 +6,7 @@
 architecture: {{ $architecture }}
 
 actions:
-  - action: apt
-    description: Mycroft Mark 2 specific packages
-    packages:
-      - plasma-nano
-      - mycroft-gui-mark-2
-
   - action: overlay
     description: Mycroft Mark 2 specific overlay
-    source: ../overlays/mark2
+    source: ../overlays/base-embedded
+
