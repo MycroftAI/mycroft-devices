@@ -11,7 +11,7 @@ actions:
     source: ../overlays/mycroft
 
   - action: download
-    url: http://frozenmazegames.se/mycroft-core-setup-aarch64.tar.gz
+    url: http://notmart.org/misc/mycroft/mycroft-core-setup-aarch64.tar.gz
     name: mycroft-core
     filename: mycroft-core-setup-aarch64.tar.gz
 
