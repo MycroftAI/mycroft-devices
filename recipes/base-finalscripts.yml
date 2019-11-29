@@ -1,0 +1,17 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $firmware_version := or .firmware_version "master" -}}
+{{ $suite :=  or .suite "bionic" }}
+{{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: run
+    description: Set up system locale
+    chroot: true
+    script: ../scripts/03-setup_locale.sh
+
+  - action: run
+    description: remove zfs
+    chroot: true
+    script: ../scripts/051-zfs.sh 

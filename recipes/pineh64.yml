@@ -1,0 +1,79 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{ $suite :=  "bionic" }}
+{{- $image := or .image "mycroft-pineh64.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: run
+    origin: kernel
+    chroot: true
+    description: Install kernel
+    label: dpkg
+    command: dpkg -i /var/tmp/*.deb && cd /lib/modules/*-pine64* && mkdir extra && cp /var/tmp/mali_kbase.ko extra/ && rm /var/tmp/* -r
+
+  - action: download
+    description: Fetch u-boot build
+    url: https://files.xenon.pangea.pub/pineh64/u-boot-sunxi-with-spl.bin
+    name: u-boot
+    filename: u-boot-sunxi-with-spl.bin
+    unpack: false
+
+  - action: overlay
+    origin: u-boot
+    source: .
+    destination: /var/tmp/u-boot-sunxi-with-spl.bin
+
+  - action: run
+    chroot: true
+    description: Run depmod for extra module
+    label: depmod
+    command: depmod $(ls /lib/modules/)
+
+    # Wayland drivers
+  - action: download
+    description: Fetch latest wayland drivers blob
+    url: https://files.xenon.pangea.pub/pineh64/mali-t720-r18p0-01rel0-um-018-linux-opengles-release-wayland-server-gbm-composer-arm64-glibc.tar.gz
+    name: wayland
+    filename: wayland.tar.bz2
+    unpack: true
+
+  - action: overlay
+    origin: wayland
+    source: .
+    destination: /usr/lib/aarch64-linux-gnu/mali-egl/
+
+  - action: overlay
+    source: pineh64
+    destination: /
+
+  - action: image-partition
+    imagename: {{ $image }}
+    imagesize: 8GB
+    partitiontype: msdos
+    mountpoints:
+      - mountpoint: /
+        partition: ROOTFS
+    partitions:
+      - name: ROOTFS
+        fs: ext4
+        start: 1M
+        end: 100%
+        flags: [ boot ]
+
+  - action: run
+    description: Set hostname
+    chroot: true
+    command: echo pineh64 > /etc/hostname
+
+  - action: run
+    description: Compile u-boot script
+    chroot: true
+    label: mkimage
+    command: mkimage -A arm -O linux -T script -C none -n "U-Boot boot script" -d /boot/boot.txt /boot/boot.scr
+
+#TODO after filesystem?
+  - action: raw
+    origin: filesystem
+    source: /var/tmp/u-boot-sunxi-with-spl.bin
+    offset: 8192

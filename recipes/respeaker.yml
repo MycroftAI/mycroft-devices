@@ -1,0 +1,70 @@
+{{- $image := or .image "mycroft-mark2-respeaker.img" -}}
+{{ $suite :=  "bionic" }}
+
+architecture: armhf
+
+actions:
+  - action: run
+    description: Add respeaker apt repo
+    chroot: true
+    command: echo "deb http://respeaker.seeed.io/deb stretch main" > /etc/apt/sources.list.d/respeaker.list
+
+  - action: run
+    description: Add neon apt repo
+    chroot: true
+    command: echo "deb https://archive.neon.kde.org/unstable bionic main" > /etc/apt/sources.list.d/neon.list
+
+  - action: run
+    description: Add xneon apt repo
+    chroot: true
+    command: echo "deb http://archive.xenon.pangea.pub/unstable bionic main" > /etc/apt/sources.list.d/xenon.list
+
+  - action: apt
+    packages:
+      - libmali-rk-utgard-400-r7p0
+      - linux-firmware-image-4.4.138-respeaker-r0
+      - linux-image-4.4.138-respeaker-r0
+      - re-bluetooth
+      - re-wifi
+      - rk-firmware
+      - xserver-xorg-video-armsoc-bsp-rock64
+
+  - action: overlay
+    source: ../overlays/respeaker
+
+  # partition table
+  - action: image-partition
+    imagename: {{ $image }}
+    imagesize: 8GB
+    partitiontype: msdos
+    mountpoints:
+      - mountpoint: /
+        partition: ROOTFS
+    partitions:
+      - name: BOOT
+        fs: fat32
+        start: 32768s
+        end: 237567s
+        flags: [ boot ]
+      - name: ROOTFS
+        fs: ext4
+        start: 237568s
+        end: 100%
+        flags: [ boot ]
+
+#TODO after filesystem?
+  - action: raw
+    origin: filesystem
+    source: /opt/u-boot/respeakerv2/idbloader.img
+    offset: {{ sector 64 }}
+
+  - action: raw
+    origin: filesystem
+    source: /opt/u-boot/respeakerv2/uboot.img
+    offset: {{ sector 16384 }}
+
+  - action: raw
+    origin: filesystem
+    source: /opt/u-boot/respeakerv2/trust.img
+    offset: {{ sector 24576 }}
+

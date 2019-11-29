@@ -1,0 +1,112 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $firmware_version := or .firmware_version "master" -}}
+{{ $suite :=  or .suite "bionic" }}
+{{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+    # Hardware specific parts
+  - action: download
+    description: Fetch latest kernel ci build
+    url: https://bshah.in/linux-pi4.zip
+    name: kernel
+    filename: kernel.zip
+    unpack: true
+    compression: zip
+
+  # Download all needed proprietary stuff first
+  - action: download
+    description: Download latest version of the firmware from GitHub
+    url: https://github.com/raspberrypi/firmware/archive/{{ $firmware_version }}.tar.gz
+    unpack: true
+    name: firmware
+
+  - action: download
+    description: Download latest version of the nonfree firmware from GitHub
+    url: https://github.com/RPi-Distro/firmware-nonfree/archive/master.tar.gz
+    unpack: true
+    name: firmwarenonfree
+
+  - action: run
+    description: Add ubuntu-x-swat ppa
+    chroot: true
+    command: add-apt-repository ppa:ubuntu-x-swat/updates -yn
+
+  - action: run
+    description: Add ubuntu-raspi2 ppa
+    chroot: true
+    command: add-apt-repository ppa:ubuntu-raspi2/ppa -yn
+
+  - action: overlay
+    origin: kernel
+    source: .
+    destination: /var/tmp/
+
+  # add firmware
+  - action: overlay
+    origin: firmware
+    source: firmware-{{ $firmware_version }}/boot
+    destination: /boot/firmware
+
+  - action: run
+    chroot: true
+    command: rm -rvf /boot/firmware/kernel*.img /boot/firmware/*.dtb /boot/firmware/overlays
+
+  - action: run
+    origin: kernel
+    chroot: true
+    description: Install kernel
+    label: dpkg
+    command: dpkg -i /var/tmp/*.deb && rm /var/tmp/* -r
+
+  - action: run
+    description: Copy dtb to boot firmware partition
+    chroot: true
+    command: mkdir -p /boot/firmware/overlays && cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot/firmware && cp -v /usr/lib/linux-image-*/overlays/* /boot/firmware/overlays/
+
+  - action: overlay
+    source: ../overlays/rpi4-config
+    destination: /boot/firmware
+
+  - action: overlay
+    origin: firmwarenonfree
+    source: firmware-nonfree-master
+    destination: /var/tmp
+
+  - action: run
+    description: Copy broadcom firmware
+    chroot: true
+    command: cp -r /var/tmp/brcm/brcmfmac43455-sdio.* /lib/firmware/brcm/
+
+  - action: run
+    description: Copy kernel to where bootloader expects it
+    chroot: true
+    script: ../scripts/01-pi_copy_kernel.sh
+
+  - action: image-partition
+    imagename: {{ $image }}
+    imagesize: 8GB
+    partitiontype: msdos
+    mountpoints:
+      - mountpoint: /
+        partition: root
+      - mountpoint: /boot/firmware
+        partition: firmware
+        options: [ x-systemd.automount ]
+    partitions:
+      - name: firmware
+        fs: fat32
+        start: 0%
+        end: 64MB
+      - name: root
+        fs: ext4
+        start: 64MB
+        end: 100%
+        flags: [boot]
+
+  - action: run
+    description: Set hostname
+    chroot: true
+    command: echo raspberrypi4 > /etc/hostname
+

@@ -1,0 +1,58 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $firmware_version := or .firmware_version "master" -}}
+{{ $suite :=  or .suite "bionic" }}
+{{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: apt
+    description: Basic packages
+    packages:
+      - bash-completion
+      - vim
+      - alsa-utils
+      - git
+      - python3
+
+    # Desktop packages
+  - action: apt
+    description: Base packages
+    packages:
+      - xauth
+      - sddm
+      - kwin-wayland
+      - openssh-server
+      - ftp
+      - i2c-tools
+      - konsole
+      - nano
+      - i2c-tools
+      - rng-tools5
+
+  - action: overlay
+    description: fix DNS inside container
+    source: ../overlays/resolv
+
+    # Desktop packages
+  - action: apt
+    description: Plasma packages
+    packages:
+      - plasma-workspace-wayland
+      - plasma-pa
+      - plasma-widgets-addons
+      - libkf5wallet-bin
+      - kscreen
+
+  - action: overlay
+    description: fix DNS inside container
+    source: ../overlays/resolv
+
+  - action: apt
+    description: Networking packages
+    packages:
+      - network-manager
+      - plasma-nm
+      - ubuntu-minimal
+
+

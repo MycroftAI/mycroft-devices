@@ -1,0 +1,60 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $firmware_version := or .firmware_version "master" -}}
+{{ $suite :=  or .suite "bionic" }}
+{{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:  
+  - action: overlay
+    description: Mycroft Mark 2 specific overlay
+    source: ../overlays/mycroft
+
+  - action: download
+    url: https://frozenmazegames.se/mycroft-core-setup-aarch64.tar.gz
+    name: mycroft-core
+    filename: mycroft-core-setup-aarch64.tar.gz
+
+  - action: overlay
+    origin: mycroft-core
+    source: .
+    destination: /var/tmp/mycroft-core-setup-aarch64.tar.gz
+
+  - action: download
+    url: http://frozenmazegames.se/mimic-arm64_1.2.0.2+1559651054-1.deb
+    name: mimic
+    filename: mimic-arm64_1.2.0.2+1559651054-1.deb
+
+  - action: overlay
+    origin: mimic
+    source: .
+    destination: /var/tmp/mimic-arm64_1.2.0.2+1559651054-1.deb
+
+  - action: apt
+    description: Mycroft runtime dependencies
+    packages:
+      - pcre2-utils
+      - portaudio19-dev
+      - jq
+      - mpg123
+      - libfann-dev
+      - flac
+      - breeze-icon-theme
+
+    # Mycroft packages
+  - action: apt
+    description: Mycroft packages
+    packages:
+      - mycroft-gui
+      - qml-module-org-kde-lottie
+
+  - action: run
+    description: Set up user account
+    chroot: true
+    script: ../scripts/02-setup_mycroft_user.sh
+
+  - action: run
+    description: Install mycroft base software
+    chroot: true
+    script: ../scripts/92-clone-mycroft.sh
+

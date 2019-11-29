@@ -1,0 +1,18 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $firmware_version := or .firmware_version "master" -}}
+{{ $suite :=  or .suite "bionic" }}
+{{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: run
+    description: Add Xenon gpg key
+    chroot: true
+    command: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 'CB87 A99C D05E 5E0C 7017  4A68 E8AF 1B0B 45D8 3EBD'
+
+  - action: run
+    description: Add xenon apt repo
+    chroot: true
+    command: echo "deb http://archive.xenon.pangea.pub/unstable bionic main" > /etc/apt/sources.list.d/xenon.list
+

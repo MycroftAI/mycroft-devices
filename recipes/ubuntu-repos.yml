@@ -1,0 +1,40 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $firmware_version := or .firmware_version "master" -}}
+{{ $suite :=  or .suite "bionic" }}
+{{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: debootstrap
+    keyring-package: ubuntu-keyring
+    keyring-file: ubuntu-archive-keyring.gpg
+    suite: {{ $suite }}
+    components:
+      - main
+      - restricted
+      - multiverse
+      - universe
+    mirror: http://ports.ubuntu.com/ubuntu-ports
+    variant: minbase
+
+  - action: run
+    description: Add bionic-updates apt repo
+    chroot: true
+    command: echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-updates main restricted multiverse universe" >> /etc/apt/sources.list
+
+  - action: run
+    description: Add bionic-backports apt repo
+    chroot: true
+    command: echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-backports main restricted multiverse universe" >> /etc/apt/sources.list
+ 
+  - action: apt
+    packages:
+      - gnupg
+      - wget
+      - curl
+      - apt-transport-https
+      - software-properties-common
+      - linux-firmware
+      - kmod
+
