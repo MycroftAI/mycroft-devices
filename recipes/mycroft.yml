@@ -46,7 +46,6 @@ actions:
     description: Mycroft packages
     packages:
       - mycroft-gui
-      - mycroft-gui-mark-2
       - qml-module-org-kde-lottie
 
   - action: run
