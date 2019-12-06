@@ -22,6 +22,7 @@ mkdir -p /home/$USER/Documents
 # Install default kwallet files
 mkdir -p /home/$USER/.local/share
 cp -r /etc/skel/.local/kwalletd /home/$USER/.local/share
+cp -r /etc/skel/.local/* /home/$USER/.local/
 
 chown -R $UGID:$UGID /home/$USER
 
