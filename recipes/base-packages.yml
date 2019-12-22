@@ -30,10 +30,6 @@ actions:
       - i2c-tools
       - rng-tools5
 
-  - action: overlay
-    description: fix DNS inside container
-    source: ../overlays/resolv
-
     # Desktop packages
   - action: apt
     description: Plasma packages
@@ -43,10 +39,6 @@ actions:
       - plasma-widgets-addons
       - libkf5wallet-bin
       - kscreen
-
-  - action: overlay
-    description: fix DNS inside container
-    source: ../overlays/resolv
 
   - action: apt
     description: Networking packages
