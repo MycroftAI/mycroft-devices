@@ -66,8 +66,14 @@ actions:
     command: mkdir -p /boot/firmware/overlays && cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot/firmware && cp -v /usr/lib/linux-image-*/overlays/* /boot/firmware/overlays/
 
   - action: overlay
+    description: Add Raspberry Pi 4 firmware overlay
     source: ../overlays/rpi4-config
     destination: /boot/firmware
+
+  - action: overlay
+    description: Add Raspberry Pi 4 root overlay
+    source: ../overlays/rpi4
+    destination: /
 
   - action: overlay
     origin: firmwarenonfree
