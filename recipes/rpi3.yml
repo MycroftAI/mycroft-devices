@@ -1,20 +1,12 @@
-{{- $architecture := or .architecture "arm64" -}}
+{{- $architecture := or .architecture "armhf" -}}
 {{- $firmware_version := or .firmware_version "master" -}}
 {{ $suite :=  or .suite "bionic" }}
-{{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+{{- $image := or .image "mycroft-mark2-rpi3.img" -}}
 
 architecture: {{ $architecture }}
 
 actions:
     # Hardware specific parts
-  - action: download
-    description: Fetch latest kernel ci build
-    url: https://bshah.in/linux-pi4.zip
-    name: kernel
-    filename: kernel.zip
-    unpack: true
-    compression: zip
-
   # Download all needed proprietary stuff first
   - action: download
     description: Download latest version of the firmware from GitHub
@@ -28,27 +20,21 @@ actions:
     unpack: true
     name: firmwarenonfree
 
-  - action: overlay
-    origin: kernel
-    source: .
-    destination: /var/tmp/
+  - action: run
+    description: Add ubuntu-x-swat ppa
+    chroot: true
+    command: add-apt-repository ppa:ubuntu-x-swat/updates -yn
+
+  - action: run
+    description: Add ubuntu-raspi2 ppa
+    chroot: true
+    command: add-apt-repository ppa:ubuntu-raspi2/ppa -yn
 
   # add firmware
   - action: overlay
     origin: firmware
     source: firmware-{{ $firmware_version }}/boot
     destination: /boot/firmware
-
-  - action: run
-    chroot: true
-    command: rm -rvf /boot/firmware/kernel*.img /boot/firmware/*.dtb /boot/firmware/overlays
-
-  - action: run
-    origin: kernel
-    chroot: true
-    description: Install kernel
-    label: dpkg
-    command: dpkg -i /var/tmp/*.deb && rm /var/tmp/* -r
 
   - action: run
     description: Copy dtb to boot firmware partition
@@ -104,5 +90,5 @@ actions:
   - action: run
     description: Set hostname
     chroot: true
-    command: echo raspberrypi4 > /etc/hostname
+    command: echo raspberrypi3 > /etc/hostname
 

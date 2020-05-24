@@ -1,0 +1,17 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $firmware_version := or .firmware_version "master" -}}
+{{ $suite :=  or .suite "bionic" }}
+{{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: run
+    description: Add ubuntu-x-swat ppa
+    chroot: true
+    command: add-apt-repository ppa:ubuntu-x-swat/updates disco -yn
+
+  - action: run
+    description: Add ubuntu-raspi2 ppa
+    chroot: true
+    command: add-apt-repository ppa:ubuntu-raspi2/ppa/ubuntu bionic -yn

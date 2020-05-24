@@ -15,6 +15,14 @@ actions:
       image: {{ $image }}
 
   - action: recipe
+    recipe: recipes/rpi4-neon.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
+  - action: recipe
     recipe: recipes/rpi4.yml
     variables:
       architecture: {{ $architecture }}
@@ -48,6 +56,14 @@ actions:
 
   - action: recipe
     recipe: recipes/desktop-packages.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
+  - action: recipe
+    recipe: recipes/gstreamer-packages.yml
     variables:
       architecture: {{ $architecture }}
       firmware_version: {{ $firmware_version }}
