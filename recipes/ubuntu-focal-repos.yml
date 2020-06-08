@@ -28,3 +28,12 @@ actions:
       - linux-firmware
       - kmod
 
+  - action: run
+    description: Add Mycroft-alternatives GPG key
+    chroot: true
+    command: curl https://forslund.github.io/mycroft-alternatives/conf/mycroft-alternatives.gpg.key | apt-key add -
+
+  - action: run
+    description: Add Mycroft alternatives repo
+    chroot: true
+    command: echo "deb http://forslund.github.io/mycroft-alternatives jessie main focal main" > /etc/apt/sources.list.d/mycroft-alt.list
