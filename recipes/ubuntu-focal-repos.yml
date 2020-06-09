@@ -36,4 +36,4 @@ actions:
   - action: run
     description: Add Mycroft alternatives repo
     chroot: true
-    command: echo "deb http://forslund.github.io/mycroft-alternatives jessie main focal main" > /etc/apt/sources.list.d/mycroft-alt.list
+    command: echo "deb http://forslund.github.io/mycroft-alternatives focal main" > /etc/apt/sources.list.d/mycroft-alt.list
