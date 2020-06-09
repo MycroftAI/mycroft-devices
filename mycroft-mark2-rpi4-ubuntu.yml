@@ -54,13 +54,13 @@ actions:
       suite: {{ $suite }}
       image: {{ $image }}
 
-#  - action: recipe
-#    recipe: recipes/mark2.yml
-#    variables:
-#      architecture: {{ $architecture }}
-#      firmware_version: {{ $firmware_version }}
-#      suite: {{ $suite }}
-#      image: {{ $image }}
+  - action: recipe
+    recipe: recipes/mark2.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
 
   - action: recipe
     recipe: recipes/base-finalscripts.yml
