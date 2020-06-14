@@ -70,6 +70,11 @@ actions:
       suite: {{ $suite }}
       image: {{ $image }}
 
+  - action: run
+    description: Set respeaker as default device
+    chroot: true
+    script: scripts/95-set_respeaker_default.sh
+
   - action: recipe
     recipe: recipes/finalize.yml
     variables:
