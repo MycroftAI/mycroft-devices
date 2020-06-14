@@ -62,6 +62,11 @@ actions:
       suite: {{ $suite }}
       image: {{ $image }}
 
+  - action: apt
+    description: Add missing dependency for virtual keyboard
+    packages:
+      - qtvirtualkeyboard-plugin
+
   - action: recipe
     recipe: recipes/base-finalscripts.yml
     variables:
