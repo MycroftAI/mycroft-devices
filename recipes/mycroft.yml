@@ -11,7 +11,7 @@ actions:
     source: ../overlays/mycroft
 
   - action: download
-    url: https://frozenmazegames.se/mycroft-core-setup-aarch64.tar.gz
+    url: https://frozenmazegames.se/mycroft-core-setup-aarch64-{{ $suite }}.tar.gz
     name: mycroft-core
     filename: mycroft-core-setup-aarch64.tar.gz
 
