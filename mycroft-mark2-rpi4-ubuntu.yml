@@ -81,6 +81,11 @@ actions:
     chroot: true
     script: scripts/95-set_respeaker_default.sh
 
+  - action: run
+    description: Set TTS module to Mimic2
+    chroot: true
+    script: scripts/96-set-tts-to-mimic2.sh
+
   - action: recipe
     recipe: recipes/finalize.yml
     variables:
