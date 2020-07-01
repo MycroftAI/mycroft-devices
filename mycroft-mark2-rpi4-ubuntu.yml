@@ -66,6 +66,7 @@ actions:
     description: Add missing dependency for virtual keyboard
     packages:
       - qtvirtualkeyboard-plugin
+      - librespot
 
   - action: recipe
     recipe: recipes/base-finalscripts.yml
