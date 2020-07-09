@@ -1,9 +1,11 @@
 # If the local Mimic2 cache overlay has been included, 
 # the default TTS module must be set to mimic2 for it to be used.
 
-USER=gez
+UGID=32011
+USER=mycroft
+
 # TODO - host this properly
-cache_zip_url=''
+cache_zip_url='https://frozenmazegames.se/Mimic2-local-cache.zip'
 
 dir='/opt/mycroft/preloaded_cache/Mimic2'
 mkdir -p $dir
