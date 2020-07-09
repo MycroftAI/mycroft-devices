@@ -12,6 +12,10 @@ actions:
     script: ../scripts/03-setup_locale.sh
 
   - action: run
+    description: Install Mimic2 cache
+    chroot: true
+    script: ../scripts/96-set_tts_to_mimic2.sh
+  - action: run
     description: remove zfs
     chroot: true
     script: ../scripts/051-zfs.sh 
