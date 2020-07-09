@@ -1,6 +1,6 @@
 {{- $architecture := or .architecture "arm64" -}}
 {{- $firmware_version := or .firmware_version "master" -}}
-{{ $suite :=  or .suite "neon" }}
+{{ $suite :=  or .suite "bionic" }}
 {{- $image := or .image "mycroft-mark2-rpi4-neon.img" -}}
 
 architecture: {{ $architecture }}

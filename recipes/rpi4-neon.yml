@@ -9,9 +9,9 @@ actions:
   - action: run
     description: Add ubuntu-x-swat ppa
     chroot: true
-    command: add-apt-repository ppa:ubuntu-x-swat/updates disco -yn
+    command: add-apt-repository ppa:ubuntu-x-swat/updates -yn
 
   - action: run
     description: Add ubuntu-raspi2 ppa
     chroot: true
-    command: add-apt-repository ppa:ubuntu-raspi2/ppa/ubuntu bionic -yn
+    command: add-apt-repository ppa:ubuntu-raspi2/ppa -yn
