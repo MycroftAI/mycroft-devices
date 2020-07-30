@@ -15,4 +15,7 @@ unzip Mimic2-local-cache.zip
 rm Mimic2-local-cache.zip
 popd
 
-/home/$USER/mycroft-core/bin/mycroft-config set tts.module mimic2
+MYCROFT_CONF_PATH="/home/$USER/.mycroft/mycroft.conf"
+(cat $MYCROFT_CONF_PATH || echo "{}") | jq '. + {"tts": {"module": "mimic2"}}' > /tmp/mycroft.conf
+cp /tmp/mycroft.conf $MYCROFT_CONF_PATH
+chown mycroft:mycroft $MYCROFT_CONF_PATH
