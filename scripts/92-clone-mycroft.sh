@@ -5,6 +5,9 @@ USER=mycroft
 tar -xzf /var/tmp/mycroft-core-setup-aarch64.tar.gz -C /home/$USER/
 rm /var/tmp/mycroft-core-setup-aarch64.tar.gz
 
+# Add Mycroft helper commands to $PATH
+echo 'source /opt/mycroft/.mycroftrc' >> /home/$USER/.bashrc
+
 mkdir -p /opt/mycroft/skills
 mkdir -p /var/log/mycroft
 mkdir -p /home/$USER/.mycroft
