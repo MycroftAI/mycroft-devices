@@ -70,3 +70,21 @@ actions:
     chroot: true
     script: ../scripts/92-clone-mycroft.sh
 
+  - action: download
+    url: https://github.com/MycroftAI/precise-data/raw/dist/aarch64/precise-engine_0.3.0_aarch64.tar.gz
+    unpack: true
+    name: precise-engine
+
+  - action: overlay
+    origin: precise-engine
+    destination: /home/mycroft/.mycroft/precise/
+
+  - action: download
+    url: http://raw.githubusercontent.com/MycroftAI/precise-data/models/hey-mycroft.tar.gz
+    unpack: true
+    name: precise-model
+
+  - action: overlay
+    origin: precise-model
+    destination: /home/mycroft/.mycroft/precise/  
+
