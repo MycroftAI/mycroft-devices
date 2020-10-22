@@ -2,10 +2,11 @@
 {{- $firmware_version := or .firmware_version "master" -}}
 {{ $suite :=  or .suite "bionic" }}
 {{- $image := or .image "mycroft-mark2-rpi4.img" -}}
+{{- $user := or .user "mycroft" -}}
 
 architecture: {{ $architecture }}
 
-actions:  
+actions:
   - action: overlay
     description: Mycroft Mark 2 specific overlay
     source: ../overlays/mycroft
@@ -61,3 +62,8 @@ actions:
     chroot: true
     script: ../scripts/92-clone-mycroft.sh
 
+  - action: recipe
+    recipe: load-precise.yml
+    variables:
+      architecture: {{ $architecture }}
+      user: {{ $user }}
