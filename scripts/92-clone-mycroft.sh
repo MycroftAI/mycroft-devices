@@ -17,7 +17,3 @@ mkdir -p /home/$USER/.mycroft
 chown -R $UGID:$UGID /home/$USER
 chown -R $UGID:$UGID /opt/mycroft
 chown -R $UGID:$UGID /var/log/mycroft
-
-
-# Install mimic
-dpkg --install /var/tmp/mimic-arm64_1.2.0.2+1559651054-1.deb
