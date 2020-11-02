@@ -20,16 +20,6 @@ actions:
     source: .
     destination: /var/tmp/mycroft-core-setup-aarch64.tar.gz
 
-  - action: download
-    url: http://frozenmazegames.se/mimic-arm64_1.2.0.2+1559651054-1.deb
-    name: mimic
-    filename: mimic-arm64_1.2.0.2+1559651054-1.deb
-
-  - action: overlay
-    origin: mimic
-    source: .
-    destination: /var/tmp/mimic-arm64_1.2.0.2+1559651054-1.deb
-
   - action: apt
     description: Mycroft runtime dependencies
     packages:
@@ -59,6 +49,7 @@ actions:
       - build-essential
       - pulseaudio
       - pulseaudio-utils
+      - mimic
 
   - action: run
     description: Set up user account
