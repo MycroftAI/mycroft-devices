@@ -80,6 +80,12 @@ actions:
     chroot: true
     script: ../scripts/01-pi_copy_kernel.sh
 
+  - action: run
+    description: Set root device in cmdline.txt
+    chroot: true
+    script: ../scripts/011-set_root_fs.sh
+
+
   - action: image-partition
     imagename: {{ $image }}
     imagesize: 8GB
