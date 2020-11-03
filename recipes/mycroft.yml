@@ -11,6 +11,7 @@ actions:
     source: ../overlays/mycroft
 
   - action: download
+#TODO: need up to date arm64 and arm32 mycroft-core tarballs
     url: https://frozenmazegames.se/mycroft-core-setup-aarch64-{{ $suite }}.tar.gz
     name: mycroft-core
     filename: mycroft-core-setup-aarch64.tar.gz
