@@ -2,6 +2,7 @@
 {{- $firmware_version := or .firmware_version "master" -}}
 {{ $suite :=  or .suite "focal" }}
 {{- $image := or .image "mycroft-mark2-rpi4-ubuntu.img" -}}
+{{- $user := or .user "mycroft" -}}
 
 architecture: {{ $architecture }}
 
@@ -61,6 +62,12 @@ actions:
       firmware_version: {{ $firmware_version }}
       suite: {{ $suite }}
       image: {{ $image }}
+
+  - action: recipe
+    recipe: recipes/load-precise.yml
+    variables:
+      architecture: {{ $architecture }}
+      user: {{ $user }}
 
   - action: recipe
     recipe: recipes/mark2.yml

@@ -2,7 +2,6 @@
 {{- $firmware_version := or .firmware_version "master" -}}
 {{ $suite :=  or .suite "bionic" }}
 {{- $image := or .image "mycroft-mark2-rpi4.img" -}}
-{{- $user := or .user "mycroft" -}}
 
 architecture: {{ $architecture }}
 
@@ -61,9 +60,3 @@ actions:
     description: Install mycroft base software
     chroot: true
     script: ../scripts/92-clone-mycroft.sh
-
-  - action: recipe
-    recipe: load-precise.yml
-    variables:
-      architecture: {{ $architecture }}
-      user: {{ $user }}
