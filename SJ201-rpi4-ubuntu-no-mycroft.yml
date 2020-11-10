@@ -1,0 +1,76 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $firmware_version := or .firmware_version "master" -}}
+{{ $suite :=  or .suite "focal" }}
+{{- $image := or .image "SJ201-rpi4-ubuntu-no-mycroft.img" -}}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: recipe
+    recipe: recipes/ubuntu-focal-repos.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
+  - action: recipe
+    recipe: recipes/rpi4.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
+  - action: recipe
+    recipe: recipes/base-packages.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
+  - action: recipe
+    recipe: recipes/desktop-packages.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
+  - action: recipe
+    recipe: recipes/gstreamer-packages.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
+  - action: recipe
+    recipe: recipes/base-embedded.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
+  - action: run
+    description: Set up user account
+    chroot: true
+    script: scripts/02-setup_mycroft_user.sh
+
+  - action: recipe
+    recipe: recipes/base-finalscripts.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
+
+  - action: recipe
+    recipe: recipes/finalize.yml
+    variables:
+      architecture: {{ $architecture }}
+      firmware_version: {{ $firmware_version }}
+      suite: {{ $suite }}
+      image: {{ $image }}
