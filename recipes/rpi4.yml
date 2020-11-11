@@ -9,7 +9,11 @@ actions:
     # Hardware specific parts
   - action: download
     description: Fetch latest kernel ci build
+{{ if eq $architecture "armhf" }}
+    url: https://bshah.in/linux-pi4-armhf.zip
+{{ else }}
     url: https://bshah.in/linux-pi4-5.4-arm64.zip
+{{ end }}
     name: kernel
     filename: kernel.zip
     unpack: true
@@ -53,11 +57,18 @@ actions:
   - action: run
     description: Copy dtb to boot firmware partition
     chroot: true
+{{ if eq $architecture "armhf" }}
+    command: mkdir -p /boot/firmware/overlays && cp -v /usr/lib/linux-image-*/*.dtb /boot/firmware && cp -v /usr/lib/linux-image-*/overlays/* /boot/firmware/overlays/
+{{ else }}
     command: mkdir -p /boot/firmware/overlays && cp -v /usr/lib/linux-image-*/broadcom/*.dtb /boot/firmware && cp -v /usr/lib/linux-image-*/overlays/* /boot/firmware/overlays/
+{{ end }}
 
   - action: overlay
-    description: Add Raspberry Pi 4 firmware overlay
+{{ if eq $architecture "armhf" }}
+    source: ../overlays/rpi4-config-armhf
+{{ else }}
     source: ../overlays/rpi4-config
+{{ end }}
     destination: /boot/firmware
 
   - action: overlay
@@ -78,7 +89,7 @@ actions:
   - action: run
     description: Copy kernel to where bootloader expects it
     chroot: true
-    script: ../scripts/01-pi_copy_kernel.sh
+    script: ../scripts/01-pi_copy_kernel.sh {{ $architecture }}
 
   - action: run
     description: Set root device in cmdline.txt
