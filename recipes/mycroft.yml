@@ -12,14 +12,14 @@ actions:
 
   - action: download
 #TODO: need up to date arm64 and arm32 mycroft-core tarballs
-    url: https://frozenmazegames.se/mycroft-core-setup-aarch64-{{ $suite }}.tar.gz
+    url: https://frozenmazegames.se/mycroft-core-setup-{{ $architecture }}-{{ $suite }}.tar.gz
     name: mycroft-core
-    filename: mycroft-core-setup-aarch64.tar.gz
+    filename: mycroft-core-setup.tar.gz
 
   - action: overlay
     origin: mycroft-core
     source: .
-    destination: /var/tmp/mycroft-core-setup-aarch64.tar.gz
+    destination: /var/tmp/mycroft-core-setup.tar.gz
 
   - action: apt
     description: Mycroft runtime dependencies

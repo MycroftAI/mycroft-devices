@@ -2,8 +2,8 @@ UGID=32011
 USER=mycroft
 
 # Unpack mycroft-core-setup-aarch64.tar.gz to user home
-tar -xzf /var/tmp/mycroft-core-setup-aarch64.tar.gz -C /home/$USER/
-rm /var/tmp/mycroft-core-setup-aarch64.tar.gz
+tar -xzf /var/tmp/mycroft-core-setup.tar.gz -C /home/$USER/
+rm /var/tmp/mycroft-core-setup.tar.gz
 
 mkdir -p /opt/mycroft/skills
 mkdir -p /var/log/mycroft
