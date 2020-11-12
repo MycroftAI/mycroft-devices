@@ -4,8 +4,8 @@ This repo contains [debos](https://github.com/go-debos/debos) recipes for buildi
 
 ## Available recipes
 
+- mycroft-mark-2-rpi4-ubuntu.yml: Mycroft Mark-2 image based on Ubuntu 20.04. This aims to be stable and allow reproducable builds.
 - mycroft-mark-2-rpi4-neon.yml: Mycroft Mark-2 image based on KDE neon repositories. This is an "unstable" build using the latest and greatest version of packages available.
-- mycroft-mark-2-rpi4-focal.yml: Mycroft Mark-2 image based on Ubuntu 20.04. This aims to be stable and allow reproducable builds.
 - mycroft-picroft.yml: Placeholder for a future automatic Picroft build.
 
 ## Build instructions
@@ -26,7 +26,13 @@ docker run --rm --device /dev/kvm --user $(id -u) \
            --group-add=$(getent group kvm | cut -d : -f 3) \
            --workdir /recipes \
            --mount "type=bind,source=$(pwd),destination=/recipes" \
-           --security-opt label=disable godebos/debos RECIPE
+           --security-opt label=disable godebos/debos \
+           -e ROOT_DEV:/dev/sda2 \
+           RECIPE \
+           -m 7450M
 ```
 
-where recipe is one of the listed recipes above (ex mycroft-mark-2-rpi4-focal.yml)
+Where:
+- `/dev/sda2` defines the root device, in this case booting from USB
+- `RECIPE` is one of the listed recipes above (ex mycroft-mark-2-rpi4-ubuntu.yml)
+- `-m` flag defines memory limit allocated to the Docker container
