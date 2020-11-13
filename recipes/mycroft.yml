@@ -5,7 +5,7 @@
 
 architecture: {{ $architecture }}
 
-actions:  
+actions:
   - action: overlay
     description: Mycroft Mark 2 specific overlay
     source: ../overlays/mycroft
@@ -61,4 +61,3 @@ actions:
     description: Install mycroft base software
     chroot: true
     script: ../scripts/92-clone-mycroft.sh
-
