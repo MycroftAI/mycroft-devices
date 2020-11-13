@@ -10,3 +10,7 @@ actions:
     description: Mycroft Mark 2 specific overlay
     source: ../overlays/base-embedded
 
+  - action: overlay
+    description: Mycroft helper commands overlay
+    source: ../overlays/helper-commands
+    destination: /opt/mycroft/
