@@ -42,7 +42,6 @@ actions:
       - bison
       - swig
       - libglib2.0-dev
-      - screen
       - curl
       - libicu-dev
       - pkg-config
