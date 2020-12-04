@@ -13,7 +13,7 @@ actions:
 
   - action: download
     description: Download Mimic2 Cache
-    url: https://frozenmazegames.se/Mimic2-local-cache.zip
+    url: https://github.com/MycroftAI/mycroft-devices/raw/assets/Mimic2-local-cache.zip
     unpack: true
     name: mimic2-cache
     filename: Mimic2-local-cache.zip
@@ -37,4 +37,4 @@ actions:
   - action: run
     description: remove zfs
     chroot: true
-    script: ../scripts/051-zfs.sh 
+    script: ../scripts/051-zfs.sh
