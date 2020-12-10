@@ -51,3 +51,8 @@ actions:
   - action: run
     description: Create GPIO group to access /dev/gpiomem
     source: ../scripts/81-access_gpiomem.sh
+
+  - action: overlay
+    description: Override default RPi4 firmware config
+    source: ../overlays/mark2-config
+    destination: /boot/firmware

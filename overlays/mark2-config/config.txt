@@ -1,0 +1,45 @@
+
+# have a properly sized image
+disable_overscan=1
+
+# for sound over HDMI
+# hdmi_drive=2
+hdmi_ignore_cec_init=1
+
+# armstub8-gic stub for Pi4s with older firmware
+armstub=armstub8-gic.bin
+enable_gic=1
+
+[pi4]
+dtoverlay=vc4-fkms-v3d
+dtparam=i2c_arm=on
+dtparam=i2c_arm_baudrate=100000
+dtparam=i2s=on
+dtparam=spi=on
+arm_64bit=1
+max_framebuffers=2
+
+[all]
+gpu_mem=320
+
+# Set 'force_turbo=1' to disable dynamic overclocking and enable overclocking always
+force_turbo=1
+
+arm_freq=600
+arm_freq_min=600
+core_freq=600
+core_freq_min=600
+
+# Uncomment some or all of these to enable the optional hardware interfaces
+
+# Uncomment this to enable infrared communication.
+#dtoverlay=gpio-ir,gpio_pin=17
+#dtoverlay=gpio-ir-tx,gpio_pin=18
+
+# Additional overlays and parameters are documented /boot/overlays/README
+
+# Enable audio (loads snd_bcm2835)
+#dtparam=audio=on
+
+enable_uart=1
+
