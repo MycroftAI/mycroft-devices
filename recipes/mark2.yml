@@ -47,3 +47,7 @@ actions:
   - action: overlay
     description: Mycroft Mark 2 specific overlay
     source: ../overlays/mark2
+
+  - action: run
+    description: Create GPIO group to access /dev/gpiomem
+    source: ../scripts/81-access_gpiomem.sh
