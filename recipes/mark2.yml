@@ -56,3 +56,17 @@ actions:
     description: Override default RPi4 firmware config
     source: ../overlays/mark2-config
     destination: /boot/firmware
+
+  - action: run
+    description: Add I2S kernel module
+    chroot: true
+    command: insmod /lib/modules/i2s/i2s_master_loader.ko
+
+  - action: run
+    chroot: true
+    command: /lib/modules/i2s/setup_bclk
+
+  - action: run
+    chroot: true
+    command: /lib/modules/i2s/setup_mclk
+    
