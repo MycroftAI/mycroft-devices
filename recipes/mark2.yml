@@ -50,7 +50,8 @@ actions:
 
   - action: run
     description: Create GPIO group to access /dev/gpiomem
-    source: ../scripts/81-access_gpiomem.sh
+    chroot: true
+    script: ../scripts/81-access_gpiomem.sh
 
   - action: overlay
     description: Override default RPi4 firmware config
