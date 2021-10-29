@@ -2,6 +2,10 @@
 
 This repo contains [debos](https://github.com/go-debos/debos) recipes for building Mycroft installation images.
 
+**⚠️ This repository is not actively maintained.**
+
+The recipes here are likely not in a working state. The official Mark II image is now built using [Pantacor](pantacor.com) containers. If anyone would like to create a working image to generate new distributions for the Mark II, we are very open to receiving contributions.
+
 ## Available recipes
 
 - mycroft-mark-2-rpi4-ubuntu.yml: Mycroft Mark-2 image based on Ubuntu 20.04. This aims to be stable and allow reproducable builds.
